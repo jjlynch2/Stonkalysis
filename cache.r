@@ -1,5 +1,5 @@
-######################################################Polygon.io API
-readCache_poly <- function(ticker) {
+#reads Cached data
+readCache <- function(ticker) {
 	file_list <- list.files(cache_path)
 	success <- FALSE
 	financial <- c()
@@ -7,72 +7,48 @@ readCache_poly <- function(ticker) {
 		for(f in file_list) {
 			if(f == ticker) {
 				financial <- readRDS(file=paste(cache_path, ticker, "/financial.Rds",sep=""))
+				profile <- readRDS(file=paste(cache_path, ticker, "/profile.Rds",sep=""))
+				chart <- readRDS(file=paste(cache_path, ticker, "/chart.Rds",sep=""))
+				advanced <- readRDS(file=paste(cache_path, ticker, "/advanced.Rds",sep=""))
+				insider <- readRDS(file=paste(cache_path, ticker, "/insider.Rds",sep=""))
+				institutional <- readRDS(file=paste(cache_path, ticker, "/institutional.Rds",sep=""))
+				cache_date <- readRDS(file=paste(cache_path, ticker, "/cache_date.Rds",sep=""))
 				success <- TRUE
+
 			}
 		}
 	}
 	if(!success) {
 		return(FALSE)
 	} else {
-		return(financial)
+		return(list(financial, profile, chart, advanced, cache_date))
 	}
 }
 
 #write cache - gets called from update
-writeCache_poly <- function(ticker, financial) {
+writeCache<- function(ticker, financial, profile, chart, advanced, institutional, insider, cache_date) {
 	if(!dir.exists(paste(cache_path, ticker, sep=""))) {
 		dir.create(paste(cache_path, ticker, sep=""))
 	}
 	saveRDS(financial, file=paste(cache_path, ticker, "/financial.Rds",sep=""))
-}
-######################################################Polygon.io API
-
-######################################################Alpha Vantage API
-readCache_alpha <- function(ticker) {
-	file_list <- list.files(cache_path)
-	success <- FALSE
-	financial <- c()
-	if(length(file_list) > 0) {
-		for(f in file_list) {
-			if(f == ticker) {
-				profile <- readRDS(file=paste(cache_path, ticker, "/profile.Rds",sep=""))
-				daily <- readRDS(file=paste(cache_path, ticker, "/daily.Rds",sep=""))
-				weekly <- readRDS(file=paste(cache_path, ticker, "/weekly.Rds",sep=""))
-				monthly <- readRDS(file=paste(cache_path, ticker, "/monthly.Rds",sep=""))
-				success <- TRUE
-			}
-		}
-	}
-	if(!success) {
-		return(FALSE)
-	} else {
-		return(list(profile, daily, weekly, monthly))
-	}
-}
-
-#write cache - gets called from update
-writeCache_alpha <- function(ticker, profile, daily, weekly, monthly) {
-	if(!dir.exists(paste(cache_path, ticker, sep=""))) {
-		dir.create(paste(cache_path, ticker, sep=""))
-	}
 	saveRDS(profile, file=paste(cache_path, ticker, "/profile.Rds",sep=""))
-	saveRDS(daily, file=paste(cache_path, ticker, "/daily.Rds",sep=""))
-	saveRDS(weekly, file=paste(cache_path, ticker, "/weekly.Rds",sep=""))
-	saveRDS(monthly, file=paste(cache_path, ticker, "/monthly.Rds",sep=""))
+	saveRDS(chart, file=paste(cache_path, ticker, "/chart.Rds",sep=""))
+	saveRDS(advanced, file=paste(cache_path, ticker, "/advanced.Rds",sep=""))
+	saveRDS(institutional, file=paste(cache_path, ticker, "/institutional.Rds",sep=""))
+	saveRDS(insider, file=paste(cache_path, ticker, "/insider.Rds",sep=""))
+	saveRDS(cache_date, file=paste(cache_path, ticker, "/cache_date.Rds",sep=""))
 }
-######################################################Alpha Vantage API
 
-######################################################Common cache functions
 #update cache
 updateCache <- function(ticker) {
 	profile <- getProfile(ticker)
-	daily <- getProfile(ticker)
-	weekly <- getProfile(ticker)
-	monthly <- getProfile(ticker)
+	chart <- getChartData(ticker)
+	advanced <- getAdvancedStats(ticker)
 	financial <- getFinance(ticker)
-	writeCache_poly(ticker, financial)
-	writeCache_alpha(ticker, profile, daily, weekly, monthly)
-	Sys.sleep(API_LIMIT)
+	institutional <- getInstitutionalOwnership(ticker)
+	insider <- getInsiderSummary(ticker)
+	cache_date <- cache_date <- c(paste(as.POSIXct(format(Sys.time()), tz="GMT")))
+	writeCache(ticker, financial, profile, chart, advanced, institutional, insider, cache_date)
 }
 
 #bulk update cache for all tickers previously cached. time intensive
@@ -84,4 +60,3 @@ updateCached <- function() {
 		}
 	}
 }
-######################################################Common cache functions

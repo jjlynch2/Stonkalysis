@@ -1,0 +1,15 @@
+Package: Valuation App
+Title: Financial Valuation App
+Version: 0.0.1
+Authors@R: person("Jeff", "Lynch", email = "jjlynch@osteocoder.com", role = c("aut","cre"))
+Description: This package provides fundamental analysis for financial data of public companies
+Depends:
+    R (>= 3.3.0),
+	shiny,
+	rjson
+License: GPL-2
+LazyData: true
+ByteCompile: true
+Imports:
+	shiny,
+	rjson
