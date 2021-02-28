@@ -17,7 +17,13 @@ configuration_ui <- tabItem(tabName = "Configuration",
 			column(3,
 				sidebarPanel(
 					uiOutput("delete_tickers"),
-					actionButton("delete_ticker_button","Delete Tickers", icon = icon("minus"))
+					actionButton("delete_ticker_button","Delete Tickers", icon = icon("trash"))
+				,width=12)
+			),
+			column(3,
+				sidebarPanel(
+					uiOutput("api_key"),
+					actionButton("add_key","Add API key", icon = icon("plus"))
 				,width=12)
 			)
 		),

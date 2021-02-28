@@ -3,7 +3,6 @@ cache_date_table <- reactiveValues(cache_date_table = data.frame())
 av_tickers <- reactiveValues(av_tickers = list.files(cache_path, recursive = FALSE, full.names=FALSE))
 ticker_choice <- reactiveValues(ticker_choice = getTickers(APIURL, apikey))
 
-
 update_table <- function() {
 	showModal(modalDialog(title = "Updating table...", easyClose = FALSE, footer = NULL))
 	cache_date <- data.frame()
@@ -20,6 +19,16 @@ update_table <- function() {
 
 observeEvent(TRUE, {
 	update_table()
+})
+
+output$api_key <- renderUI({
+	textInput(inputId = "api_key", "API key", value=apikey)
+})
+observeEvent(input$add_key, {
+	if(input$api_key != apikey) {
+		writeLines(input$api_key, con = system.file("Stonkalysis/server", 'apikey', package = "Stonkalysis"))
+		apikey <<- input$api_key
+	}
 })
 
 output$cache_table <- DT::renderDataTable ({
@@ -79,7 +88,6 @@ output$cached_tickers <- renderUI({
 	temp <- av_tickers$av_tickers
 	selectizeInput(inputId = "update_ticker", label = "Cached Tickers", choices = c(temp), multiple = TRUE)
 })
-
 
 observeEvent(input$update_tickers, {
 	showModal(modalDialog(title = "Updating cache...", easyClose = FALSE, footer = NULL))

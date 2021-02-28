@@ -6,16 +6,22 @@ source(system.file("Stonkalysis/ui", 'financial.r', package = "Stonkalysis"), lo
 source(system.file("Stonkalysis/ui", 'comparison.r', package = "Stonkalysis"), local=TRUE)
 source(system.file("Stonkalysis/ui", 'technical.r', package = "Stonkalysis"), local=TRUE)
 
-ui <- dashboardPage(skin = "green",
-	dashboardHeader(title = "Stonkalysis"),
+ui <- dashboardPage(skin = "blue",
+	dashboardHeader(
+		title = "Stonkalysis",
+		titleWidth=150
+	),
 	dashboardSidebar(
-		uiOutput("tickers"),
-		menuItem("About", tabName = "About", icon = icon("question")),
-		menuItem("Configuration", tabName = "Configuration", icon = icon("cogs")),
-		menuItem("Fundamental", tabName = "Fundamental", icon = icon("calculator")),
-		menuItem("Financial", tabName = "Financial", icon = icon("money-bill-wave")),
-		menuItem("Comparison", tabName = "Comparison", icon = icon("balance-scale-left")),
-		menuItem("Technical", tabName = "Technical", icon = icon("chart-bar"))
+		sidebarMenu(
+			uiOutput("tickers"),
+			menuItem("About", tabName = "About", icon = icon("question")),
+			menuItem("Configuration", tabName = "Configuration", icon = icon("cogs")),
+			menuItem("Fundamental", tabName = "Fundamental", icon = icon("calculator")),
+			menuItem("Financial", tabName = "Financial", icon = icon("money-bill-wave")),
+			menuItem("Comparison", tabName = "Comparison", icon = icon("balance-scale-left")),
+			menuItem("Technical", tabName = "Technical", icon = icon("chart-bar"))
+		),
+		width = 150
 	),
 	dashboardBody(
 		tabItems(
