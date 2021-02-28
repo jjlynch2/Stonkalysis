@@ -1,14 +1,14 @@
 #three-day rule for selling
-monitorThreeDayRule <- function() {
+#monitorThreeDayRule <- function() {
 
-}
+#}
 
 #MACD Average alerts for buying and selling (see other algorithm)
-monitorMACDAverages <- function() {
+#monitorMACDAverages <- function() {
 
-}
+#}
 
 #Pulls 1 minute data for ticker
-monitorOneMinuteData <- function(ticker) {
+#monitorOneMinuteData <- function(ticker) {
 
-}
+#}

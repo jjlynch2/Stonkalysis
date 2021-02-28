@@ -1,5 +1,5 @@
 #reads Cached data
-readCache <- function(ticker) {
+readCache <- function(ticker, cache_path) {
 	file_list <- list.files(cache_path)
 	success <- FALSE
 	financial <- c()
@@ -26,7 +26,7 @@ readCache <- function(ticker) {
 }
 
 #write cache - gets called from update
-writeCache<- function(ticker, financial, profile, chart, advanced, institutional, insider, cache_date) {
+writeCache<- function(ticker, financial, profile, chart, advanced, institutional, insider, cache_date, cache_path) {
 	if(!dir.exists(paste(cache_path, ticker, sep=""))) {
 		dir.create(paste(cache_path, ticker, sep=""))
 	}
@@ -40,19 +40,19 @@ writeCache<- function(ticker, financial, profile, chart, advanced, institutional
 }
 
 #update cache
-updateCache <- function(ticker) {
-	profile <- getProfile(ticker)
-	chart <- getChartData(ticker)
-	advanced <- getAdvancedStats(ticker)
-	financial <- getFinance(ticker)
-	institutional <- getInstitutionalOwnership(ticker)
-	insider <- getInsiderSummary(ticker)
+updateCache <- function(ticker, APIURL, apikey, cache_path) {
+	profile <- getProfile(ticker, APIURL, apikey)
+	chart <- getChartData(ticker, APIURL, apikey)
+	advanced <- getAdvancedStats(ticker, APIURL, apikey)
+	financial <- getFinance(ticker, APIURL, apikey)
+	institutional <- getInstitutionalOwnership(ticker, APIURL, apikey)
+	insider <- getInsiderSummary(ticker, APIURL, apikey)
 	cache_date <- cache_date <- c(paste(as.POSIXct(format(Sys.time()), tz="GMT")))
-	writeCache(ticker, financial, profile, chart, advanced, institutional, insider, cache_date)
+	writeCache(ticker, financial, profile, chart, advanced, institutional, insider, cache_date, cache_path)
 }
 
 #bulk update cache for all tickers previously cached. time intensive
-updateCached <- function() {
+updateCached <- function(cache_path) {
 	tickers <- list.files(cache_path)
 	if(length(tickers) > 0) {
 		for(t in tickers) {

@@ -1,0 +1,8 @@
+library(shiny)
+library(shinydashboard)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+#options(error = recover)
+options(warn = -1)
+options(scipen = 999)
