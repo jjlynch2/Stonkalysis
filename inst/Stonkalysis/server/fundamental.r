@@ -61,13 +61,13 @@ output$institutional_plot <- renderPlot({
 	company_ownership <- ticker_df$ticker_df[[7]]
 	pie_df <- data.frame()
 	for(o in 1:length(company_ownership)) {
-		pie_df <- rbind(pie_df, data.frame(Institution = company_ownership[[o]]$entityProperName, Holding = company_ownership[[o]]$reportedHolding))			 
+		pie_df <- rbind(pie_df, data.frame(Institution = company_ownership[[o]]$entityProperName, Holding = company_ownership[[o]]$reportedHolding, Holdingp = 0))			 
 	}
 	totalp <- sum(pie_df$Holding)
 	for(o in 1:nrow(pie_df)) {
-		pie_df[o,2] <- round(100*(pie_df[o,2] / totalp), digits=0)
+		pie_df[o,3] <- round(100*(pie_df[o,2] / totalp), digits=0)
 	}
-	ggplot(pie_df, aes(x="", y=Holding, fill=Institution)) + geom_bar(stat="identity", width=1) + coord_polar("y", start=0) + labs(x="",y="") + theme_classic() + theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holding, "%")), position = position_stack(vjust=0.5)) +   scale_fill_brewer(palette="Blues")
+	ggplot(pie_df, aes(x=Institution, y=Holding, fill=Institution)) + geom_bar(stat="identity")  + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
 })
 
 
@@ -79,7 +79,7 @@ output$ownership_plot <- renderPlot({
 		bar_df <- rbind(bar_df, data.frame(Name = company_ownership[[o]]$fullName, Traded = company_ownership[[o]]$totalSold, Group = "Sold"))
 	}
 	bar_df <- bar_df[-1,]
-	ggplot(bar_df, aes(x=Name, y=Traded, fill=Group)) + geom_bar(stat="identity") + coord_flip() + labs(x="",y="") + theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + scale_color_manual(values=c("green", "red"))
+	ggplot(bar_df, aes(x=Name, y=Traded, fill=Group)) + geom_bar(stat="identity") + coord_flip() + labs(x="",y="") + theme(plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) +   scale_fill_manual(values=c("#008000", "#FF0000"))
 })
 
 
