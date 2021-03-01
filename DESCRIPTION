@@ -7,7 +7,6 @@ Depends:
     R (>= 3.3.0),
 	shiny,
 	shinydashboard,
-	dashboardthemes,
 	rjson,
 	htmltools,
 	DT,
@@ -20,7 +19,6 @@ ByteCompile: true
 Imports:
 	shiny,
 	shinydashboard,
-	dashboardthemes,
 	rjson,
 	htmltools,
 	DT,

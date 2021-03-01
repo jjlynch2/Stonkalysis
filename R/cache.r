@@ -21,7 +21,7 @@ readCache <- function(ticker, cache_path) {
 	if(!success) {
 		return(FALSE)
 	} else {
-		return(list(financial, profile, chart, advanced, cache_date))
+		return(list(financial, profile, chart, advanced, cache_date, insider, institutional))
 	}
 }
 

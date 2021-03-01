@@ -34,11 +34,6 @@ observeEvent(input$add_key, {
 output$cache_table <- DT::renderDataTable ({
 	DT::datatable(cache_date_table$cache_date_table, options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rowname = FALSE)
 })
-	
-output$tickers <- renderUI({
-	temp <- av_tickers$av_tickers
-	selectInput(inputId = "ticker", label = "Select Ticker", choices = temp)
-})
 
 
 output$available_tickers <- renderUI({
