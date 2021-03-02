@@ -32,10 +32,44 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				)
 			)
 		),
-		tabPanel("Current Metrics"), ###each one will have raw data tables + graphs + regression predictions?
+		tabPanel("Chart",
+			fluidRow(
+				column(12,
+					sidebarPanel(
+						fluidRow(
+							column(2,
+								uiOutput("plotly_control_ui")
+							),
+							column(1,
+								uiOutput("plotly_color")
+							),
+							column(1,
+								uiOutput("plotly_color2")
+							),
+							column(3,
+								uiOutput("plotly_control_ui2")
+							)
+						),
+						fluidRow(
+							uiOutput("plotly_chart_ui")
+						),
+					,width=12)
+				)
+			),
+			fluidRow(
+				column(12,
+					sidebarPanel(
+						br(),
+						DT::dataTableOutput('chart_table'),
+					,width=12)
+				)
+			)
+		),
+		tabPanel("Current Metrics"), ###each one will have raw data tables + graphs + regression predictions? Make sure to allow user select of years with a selectizeInput somewhere. 
 		tabPanel("Annual Metrics"),
 		tabPanel("Quarterly Metrics"),
-		tabPanel("DCF")
+		tabPanel("DCF"),
+		tabPanel("DDM")
 	)
 
 )

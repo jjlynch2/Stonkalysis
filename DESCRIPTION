@@ -12,7 +12,9 @@ Depends:
 	DT,
 	ggplot2,
 	plotly,
-	dplyr
+	dplyr,
+	pracma,
+	colourpicker
 License: GPL-2
 LazyData: true
 ByteCompile: true
@@ -24,4 +26,6 @@ Imports:
 	DT,
 	ggplot2,
 	plotly,
-	dplyr
+	dplyr,
+	pracma,
+	colourpicker
