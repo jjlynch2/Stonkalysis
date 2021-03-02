@@ -1,10 +1,12 @@
 #pulls advanced financial data
 getFinance <- function(ticker, APIURL, apikey) {
-	URL_annual <- paste(APIURL, "/time-series/fundamentals/", ticker, "/annual?last=10","&token=", apikey, sep="")
-	URL_quarterly <- paste(APIURL, "/time-series/fundamentals/", ticker, "/quarterly?range=20q","&token=", apikey, sep="")
+	URL_annual <- paste(APIURL, "/time-series/fundamentals/", ticker, "/annual?last=30","&token=", apikey, sep="")
+	URL_quarterly <- paste(APIURL, "/time-series/fundamentals/", ticker, "/quarterly?range=120q","&token=", apikey, sep="")
+	URL_ttm <- paste(APIURL, "/time-series/fundamentals/", ticker, "/ttm","?token=", apikey, sep="")
 	annual <- fromJSON(file = URL_annual)
 	quarterly <- fromJSON(file = URL_quarterly)
-	return(list(annual, quarterly))
+	ttm <- fromJSON(file = URL_ttm)
+	return(list(annual, quarterly, ttm))
 }
 
 #advanced statistics with ratios pre-calculated

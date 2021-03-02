@@ -35,7 +35,6 @@ output$cache_table <- DT::renderDataTable ({
 	DT::datatable(cache_date_table$cache_date_table, options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rowname = FALSE)
 })
 
-
 output$available_tickers <- renderUI({
 	av_tickers$av_tickers <- list.files(cache_path, recursive = FALSE, full.names=FALSE)
 	for(t in av_tickers$av_tickers) {

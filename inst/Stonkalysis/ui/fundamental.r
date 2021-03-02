@@ -19,18 +19,14 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				column(6,
 					sidebarPanel(
 						uiOutput("ownership_title"),
-						br(),
-						plotOutput("institutional_plot"),
-						br(),
+						uiOutput("instutitional_ui_plot"),
 						uiOutput("ownership")
 					,width=12)
 				),
 				column(6,
 					sidebarPanel(
 						uiOutput("insider_title"),
-						br(),
-						plotOutput("ownership_plot"),
-						br(),
+						uiOutput("ownership_ui_plot"),
 						uiOutput("insider")
 					,width=12)
 				)
