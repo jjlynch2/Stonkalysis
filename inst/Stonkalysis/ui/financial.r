@@ -1,4 +1,4 @@
-financial_ui <- tabItem(tabName = "Financial",
+financial_ui <- tabItem(tabName = "Financial Data",
 	h2("Financial"),
 	tabsetPanel(id="tabSelected",
 		tabPanel("TTM",
@@ -17,6 +17,7 @@ financial_ui <- tabItem(tabName = "Financial",
 				)
 			)
 		),
+
 		tabPanel("Quarterly",
 			fluidRow(
 				column(12,

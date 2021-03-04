@@ -13,7 +13,7 @@ Depends:
 	ggplot2,
 	plotly,
 	dplyr,
-	pracma,
+	TTR,
 	colourpicker
 License: GPL-2
 LazyData: true
@@ -27,5 +27,5 @@ Imports:
 	ggplot2,
 	plotly,
 	dplyr,
-	pracma,
+	TTR,
 	colourpicker
