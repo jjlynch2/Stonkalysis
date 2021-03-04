@@ -301,7 +301,7 @@ output$plotly_chart_ui <- renderUI ({
 			fig <- plot_ly()
 			fig <- add_trace(fig, type=price$type, x=price$x, low=price$low, high=price$high, open=price$open, close=price$close, decreasing=price$decreasing, increasing=price$increasing)
 			for(o in input$plotly_options) {
-				if(any(input$plotly_options == "ma5")) {
+				if(o == "ma5") {
 					ma5 <- SMA(x = C, n = 5)
 					ma5 <- ma5[which(chart_df2$chart_df2[,10] >= input$chart_dates[1])]
 					ma5 <- ma5[which(temp1[,10] <= input$chart_dates[2])]
@@ -323,7 +323,7 @@ output$plotly_chart_ui <- renderUI ({
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options == "ma10")) {
+				if(o == "ma10") {
 					ma10 <- SMA(x = C, n = 10)
 					ma10 <- ma10[which(chart_df2$chart_df2[,10] >= input$chart_dates[1])]
 					ma10 <- ma10[which(temp1[,10] <= input$chart_dates[2])]
@@ -345,7 +345,7 @@ output$plotly_chart_ui <- renderUI ({
 					)
 					fig <- add_trace(fig, line=trace2$line, mode=trace2$mode, name=trace2$name, text=trace2$text, type=trace2$type, x=trace2$x, y=trace2$y)
 				}
-				if(any(input$plotly_options == "ma20")) {
+				if(o == "ma20") {
 					ma20 <- SMA(x = C, n = 20)
 					ma20 <- ma20[which(chart_df2$chart_df2[,10] >= input$chart_dates[1])]
 					ma20 <- ma20[which(temp1[,10] <= input$chart_dates[2])]
@@ -367,7 +367,7 @@ output$plotly_chart_ui <- renderUI ({
 					)
 					fig <- add_trace(fig, line=trace3$line, mode=trace3$mode, name=trace3$name, text=trace3$text, type=trace3$type, x=trace3$x, y=trace3$y)
 				}
-				if(any(input$plotly_options == "ma60")) {
+				if(o == "ma60") {
 					ma60 <- SMA(x = C, n = 60)
 					ma60 <- ma60[which(chart_df2$chart_df2[,10] >= input$chart_dates[1])]
 					ma60 <- ma60[which(temp1[,10] <= input$chart_dates[2])]
@@ -389,7 +389,7 @@ output$plotly_chart_ui <- renderUI ({
 					)
 					fig <- add_trace(fig, line=trace4$line, mode=trace4$mode, name=trace4$name, text=trace4$text, type=trace4$type, x=trace4$x, y=trace4$y)
 				}
-				if(any(input$plotly_options == "Bollinger Bands")) {
+				if(o == "Bollinger Bands") {
 					HLC <- cbind(as.numeric(chart_df2$chart_df2[,2]), as.numeric(chart_df2$chart_df2[,3]), as.numeric(chart_df2$chart_df2[,1]))
 					BB <- BBands(HLC = HLC)
 					BB <- BB[which(chart_df2$chart_df2[,10] >= input$chart_dates[1]),]
@@ -511,26 +511,113 @@ observeEvent(input$chart_datesv, {
 	chart_dfv$chart_dfv <- temp1
 })
 
+
+output$plotly_chart_ui_v_p <- renderUI ({
+	if(length(ticker_df$ticker_df[[3]]) > 1) {
+		df1 <- chart_dfv$chart_dfv
+		temp1 <- chart_dfv2$chart_dfv2[chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1],]
+		temp1 <- temp1[temp1[,10] <= input$chart_datesv[2],]
+		OHLC <- cbind(as.numeric(chart_dfv2$chart_dfv2[,4]), as.numeric(chart_dfv2$chart_dfv2[,2]), as.numeric(chart_dfv2$chart_dfv2[,3]), as.numeric(chart_dfv2$chart_dfv2[,1]))
+		fig <- plot_ly()
+		OHLC_V1 <- volatility(OHLC = OHLC, calc = "yang.zhang")
+		OHLC_V1 <- OHLC_V1[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V1 <- OHLC_V1[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V2 <- volatility(OHLC = OHLC, calc = "close")
+		OHLC_V2 <- OHLC_V2[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V2 <- OHLC_V2[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V3 <- volatility(OHLC = OHLC, calc = "garman.klass")
+		OHLC_V3 <- OHLC_V3[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V3 <- OHLC_V3[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V4 <- volatility(OHLC = OHLC, calc = "parkinson")
+		OHLC_V4 <- OHLC_V4[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V4 <- OHLC_V4[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V5 <- volatility(OHLC = OHLC, calc = "rogers.satchell")
+		OHLC_V5 <- OHLC_V5[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V5 <- OHLC_V5[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V6 <- volatility(OHLC = OHLC, calc = "gk.yz")
+		OHLC_V6 <- OHLC_V6[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V6 <- OHLC_V6[which(temp1[,10] <= input$chart_datesv[2])]
+		HVC <- paste("<strong><font color=\"#00688B\">", "Percentage of time the selected historical range was higher than the end date", "</font>")
+		for(o in input$plotly_options_v) {
+			if(o == "OHLC Yang and Zhang") {
+				total_num <- length(OHLC_V1)
+				last <- OHLC_V1[total_num]
+				above_num <- length(OHLC_V1[OHLC_V1 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "OHLC Yang and Zhang: </font>", percent, "%", sep="")
+			}
+			if(o == "Close-to-Close") {
+				total_num <- length(OHLC_V2)
+				last <- OHLC_V2[total_num]
+				above_num <- length(OHLC_V2[OHLC_V2 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "Close-to-Close: </font>", percent, "%", sep="")
+			}
+			if(o == "OHLC Garman and Klass") {
+				total_num <- length(OHLC_V3)
+				last <- OHLC_V3[total_num]
+				above_num <- length(OHLC_V3[OHLC_V3 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "OHLC Garman and Klass: </font>", percent, "%", sep="")
+			}
+			if(o == "HL Parkinson") {
+				total_num <- length(OHLC_V4)
+				last <- OHLC_V4[total_num]
+				above_num <- length(OHLC_V4[OHLC_V4 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "HL Parkinson: </font>", percent, "%", sep="")
+			}
+			if(o == "OHLC Rogers and Satchell") {
+				total_num <- length(OHLC_V5)
+				last <- OHLC_V5[total_num]
+				above_num <- length(OHLC_V5[OHLC_V5 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "OHLC Rogers and Satchell: </font>", percent, "%", sep="")
+			}
+			if(o == "OHLC Garman and Klass (Yang and Zhang modification)") {
+				total_num <- length(OHLC_V6)
+				last <- OHLC_V6[total_num]
+				above_num <- length(OHLC_V6[OHLC_V6 > last])
+				percent <- round((100 * (above_num / total_num)),digits=1)
+				HVC <- paste(HVC, "<br/><font color=\"#00688B\">", "OHLC Garman and Klass (Yang and Zhang modification): </font>", percent, "%", sep="")
+			}
+		}
+		HVC <- paste(HVC, "</strong>", sep="")
+		HTML(HVC)
+	} else {
+		HTML("")
+	}
+})
+
 output$plotly_chart_ui_v <- renderUI ({
 	if(length(ticker_df$ticker_df[[3]]) > 1) {
 		df1 <- chart_dfv$chart_dfv
 		temp1 <- chart_dfv2$chart_dfv2[chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1],]
 		temp1 <- temp1[temp1[,10] <= input$chart_datesv[2],]
 		OHLC <- cbind(as.numeric(chart_dfv2$chart_dfv2[,4]), as.numeric(chart_dfv2$chart_dfv2[,2]), as.numeric(chart_dfv2$chart_dfv2[,3]), as.numeric(chart_dfv2$chart_dfv2[,1]))
-		
-		
-G_OHLC <<- OHLC
-		
 		fig <- plot_ly()
+		OHLC_V1 <- volatility(OHLC = OHLC, calc = "yang.zhang")
+		OHLC_V1 <- OHLC_V1[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V1 <- OHLC_V1[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V2 <- volatility(OHLC = OHLC, calc = "close")
+		OHLC_V2 <- OHLC_V2[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V2 <- OHLC_V2[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V3 <- volatility(OHLC = OHLC, calc = "garman.klass")
+		OHLC_V3 <- OHLC_V3[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V3 <- OHLC_V3[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V4 <- volatility(OHLC = OHLC, calc = "parkinson")
+		OHLC_V4 <- OHLC_V4[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V4 <- OHLC_V4[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V5 <- volatility(OHLC = OHLC, calc = "rogers.satchell")
+		OHLC_V5 <- OHLC_V5[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V5 <- OHLC_V5[which(temp1[,10] <= input$chart_datesv[2])]
+		OHLC_V6 <- volatility(OHLC = OHLC, calc = "gk.yz")
+		OHLC_V6 <- OHLC_V6[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
+		OHLC_V6 <- OHLC_V6[which(temp1[,10] <= input$chart_datesv[2])]
+		
 		output$plotly_chartv <- renderPlotly({
 			for(o in input$plotly_options_v) {
-				if(any(input$plotly_options_v == "OHLC Yang and Zhang")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "yang.zhang")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "OHLC Yang and Zhang") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -541,18 +628,12 @@ G_OHLC <<- OHLC
 						name = "OHLC Yang and Zhang",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V1
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options_v == "Close-to-Close")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "close")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "Close-to-Close") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -563,18 +644,12 @@ G_OHLC <<- OHLC
 						name = "Close-to-Close",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V2
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options_v == "OHLC Garman and Klass")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "garman.klass")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "OHLC Garman and Klass") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -585,18 +660,12 @@ G_OHLC <<- OHLC
 						name = "OHLC Garman and Klass",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V3
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options_v == "HL Parkinson")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "parkinson")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "HL Parkinson") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -607,18 +676,12 @@ G_OHLC <<- OHLC
 						name = "HL Parkinson",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V4
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options_v == "OHLC Rogers and Satchell")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "rogers.satchell")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "OHLC Rogers and Satchell") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -629,18 +692,12 @@ G_OHLC <<- OHLC
 						name = "OHLC Rogers and Satchell",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V5
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
-				if(any(input$plotly_options_v == "OHLC Garman and Klass (Yang and Zhang modification)")) {
-					OHLC_V <- volatility(OHLC = OHLC, calc = "gk.yz")
-					OHLC_V <- OHLC_V[which(chart_dfv2$chart_dfv2[,10] >= input$chart_datesv[1])]
-					OHLC_V <- OHLC_V[which(temp1[,10] <= input$chart_datesv[2])]
-					nal <- length(which(is.na(OHLC_V)))
-					nal <- nal + 1
-					OHLC_V <- na.omit(OHLC_V)
+				if(o == "OHLC Garman and Klass (Yang and Zhang modification)") {
 					trace1 <- list(
 						line = list(
 							dash = "solid",
@@ -651,8 +708,8 @@ G_OHLC <<- OHLC
 						name = "OHLC Garman and Klass (Yang and Zhang modification)",
 						text = "",
 						type = "scatter",
-						x = df1[nal:nrow(df1),10],
-						y = OHLC_V
+						x = df1[,10],
+						y = OHLC_V6
 					)
 					fig <- add_trace(fig, line=trace1$line, mode=trace1$mode, name=trace1$name, text=trace1$text, type=trace1$type, x=trace1$x, y=trace1$y)
 				}
@@ -672,23 +729,9 @@ chart_data_table_v <- reactiveValues(chart_data_table_v = data.frame(Data = "No 
 
 update_table_chart_v <- function() {
 	if(length(ticker_df$ticker_df[[3]]) > 1) {
-
-		
-		
 		df1 <- data.frame(matrix(unlist(ticker_df$ticker_df[[3]]), nrow=length(ticker_df$ticker_df[[3]]), byrow=TRUE),stringsAsFactors=FALSE)
 		colnames(df1) <- names(ticker_df$ticker_df[[3]][[1]])
-
-		
-		
-		
-		
-		
-		
 		OHLC <- cbind(as.numeric(df1[,4]), as.numeric(df1[,2]), as.numeric(df1[,3]), as.numeric(df1[,1]))
-
-global_df1 <<- df1
-global_OHLC <<- OHLC
-
 		V1 <- volatility(OHLC = OHLC, calc = "yang.zhang")
 		V2 <- volatility(OHLC = OHLC, calc = "close")
 		V3 <- volatility(OHLC = OHLC, calc = "garman.klass")

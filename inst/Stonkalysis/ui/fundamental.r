@@ -103,6 +103,9 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						fluidRow(
 							uiOutput("plotly_chart_ui_v")
 						),
+						fluidRow(
+							uiOutput("plotly_chart_ui_v_p")
+						),
 					,width=12)
 				)
 			),
