@@ -6,51 +6,56 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			fluidRow(
 				column(6,
 					sidebarPanel(
-						uiOutput("profile1")
-					,width=12, height = 12)
-				),
-				column(6,
-					sidebarPanel(
+						uiOutput("profile1_title"),
+						br(),
+						tableOutput("profile1"),
+						br(),
 						uiOutput("profile2")
-					,width=12, height = 12)
-				)
-			),
-			fluidRow(
-				column(3,
-					sidebarPanel(
-						uiOutput("am_1")
-					,width=12)
-				),
-				column(3,
-					sidebarPanel(
-						uiOutput("am_2")
-					,width=12)
-				),
-				column(3,
-					sidebarPanel(
-						uiOutput("am_3")
-					,width=12)
-				),
-				column(3,
-					sidebarPanel(
-						uiOutput("am_4")
-					,width=12)
-				)
-			
-			),
-			fluidRow(
-				column(6,
+					,width=12),
 					sidebarPanel(
 						uiOutput("ownership_title"),
 						uiOutput("instutitional_ui_plot"),
-						uiOutput("ownership")
+						tableOutput("ownership")
 					,width=12)
 				),
 				column(6,
+					fluidRow(
+						column(6,
+							sidebarPanel(
+								tableOutput("am_1")
+							,width=12)
+						),
+						column(6,
+							sidebarPanel(
+								tableOutput("am_2")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(6,
+							sidebarPanel(
+								tableOutput("am_3")
+							,width=12)
+						),
+						column(6,
+							sidebarPanel(
+								tableOutput("am_4"),
+								br(),
+								br(),
+								br(),
+								br(),
+								br(),
+								br(),
+								br(),
+								br(),
+								br()
+							,width=12)
+						)
+					),
 					sidebarPanel(
 						uiOutput("insider_title"),
 						uiOutput("ownership_ui_plot"),
-						uiOutput("insider")
+						tableOutput("insider")
 					,width=12)
 				)
 			)
@@ -104,6 +109,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 							uiOutput("plotly_chart_ui_v")
 						),
 						fluidRow(
+							uiOutput("table_title"),
 							uiOutput("plotly_chart_ui_v_p")
 						),
 					,width=12)
