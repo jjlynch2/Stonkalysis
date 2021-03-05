@@ -30,7 +30,7 @@ output$am_3 <- renderTable(colnames=FALSE, rownames=TRUE, width="100%", striped 
 		}
 	}
 	am_3_data <- t(data.frame( am$EBITDA,am$beta,am$ttmEPS,am$peRatio,am$forwardPERatio, am$peHigh,am$peLow,am$pegRatio,am$priceToSales,am$priceToBook,am$putCallRatio))
-	rownames(am_3_data) <- c("EBITDA: ", "Beta: ", "TTM EPS: ", "PE Ratio: ", "Forward PE Ratio: ", "52 Week High PE Ratio: ", "52 Week High PE Ratio: ", "PEG Ratio: ", "PS Ratio: ", "PB Ratio: ", "Put Call Ratio: ")
+	rownames(am_3_data) <- c("EBITDA: ", "Beta: ", "TTM EPS: ", "PE Ratio: ", "Forward PE Ratio: ", "52 Week High PE Ratio: ", "52 Week Low PE Ratio: ", "PEG Ratio: ", "PS Ratio: ", "PB Ratio: ", "Put Call Ratio: ")
 	return(am_3_data)
 })
 				
@@ -101,9 +101,29 @@ output$instutitional_ui_plot <- renderUI ({
 				for(o in 1:nrow(pie_df)) {
 					pie_df[o,3] <- round(100*(pie_df[o,2] / totalp), digits=0)
 				}
-				ggplot(pie_df, aes(x=Institution, y=Holding, fill=Institution)) + geom_bar(stat="identity")  + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
+				ggplot(pie_df, aes(x=Institution, y=Holding, fill=Institution)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
 		})
 		plotOutput("institutional_plot")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$fund_ui_plot <- renderUI ({
+	if(length(ticker_df$ticker_df[[7]]) > 1) {
+		output$fund_plot <- renderPlot({
+				fund_ownership <- ticker_df$ticker_df[[8]]
+				pie_df <- data.frame()
+				for(o in 1:length(fund_ownership)) {
+					pie_df <- rbind(pie_df, data.frame(Fund = fund_ownership[[o]]$entityProperName, Holding = fund_ownership[[o]]$reportedHolding, Holdingp = 0))			 
+				}
+				totalp <- sum(pie_df$Holding)
+				for(o in 1:nrow(pie_df)) {
+					pie_df[o,3] <- round(100*(pie_df[o,2] / totalp), digits=0)
+				}
+				ggplot(pie_df, aes(x=Fund, y=Holding, fill=Fund)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
+		})
+		plotOutput("fund_plot")
 	} else {
 		HTML("<br>")
 	}
@@ -127,13 +147,42 @@ output$ownership_ui_plot <- renderUI ({
 	}
 })
 
+output$fund_title <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Fund Ownership (top 10)</font></h3></strong>")
+})
+
 output$insider_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Insider Ownership</font></h3></strong>")
+	HTML("<strong><h3><font color=\"#000000\">Insider Trading (last 6 months)</font></h3></strong>")
 })
 
 output$ownership_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Institutional Ownership</font></h3></strong>")
+	HTML("<strong><h3><font color=\"#000000\">Institutional Ownership (top 10)</font></h3></strong>")
 })
+
+
+output$fund <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+	company_fund <- ticker_df$ticker_df[[8]]
+	output_build <- data.frame()
+	if(length(company_fund) > 0 ) {
+		for(i in 1:length(company_fund)) {
+			for(o in 1:length(company_fund[[i]])) {
+				if(is.null(company_fund[[i]][[o]])) {
+					company_fund[[i]][[o]] <- "N/A"
+				}
+			}
+		}
+		for(o in 1:length(company_fund)) {
+			output_build <- rbind(output_build, data.frame(company_fund[[o]]$entityProperName, company_fund[[o]]$report_date, company_fund[[o]]$reportedHolding, company_fund[[o]]$adjHolding))			 			 
+		}
+		colnames(output_build) <- c("Fund: ", "Reported: ", "Holding: ", "Adjusted Holding: ")
+	} else {
+		output_build <- "No fund holding reported"
+	}
+	return(output_build)
+})
+
+
+
 
 output$insider <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 	company_insider <- ticker_df$ticker_df[[6]]

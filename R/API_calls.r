@@ -37,11 +37,18 @@ getInsiderSummary <- function(ticker, APIURL, apikey) {
 	return(insider)
 }
 
-#pulls institutinal wnership
+#pulls institutinal ownership
 getInstitutionalOwnership <- function(ticker, APIURL, apikey) {
 	URL_institutional <- paste(APIURL, "/stock/", ticker, "/institutional-ownership", "?token=", apikey, sep="")
 	institutional <- fromJSON(file = URL_institutional)
 	return(institutional)
+}
+
+#pulls fund ownership
+getFundOwnership <- function(ticker, APIURL, apikey) {
+	URL_fund <- paste(APIURL, "/stock/", ticker, "/fund-ownership", "?token=", apikey, sep="")
+	fund <- fromJSON(file = URL_fund)
+	return(fund)
 }
 
 #pulls available tickers for IEX API

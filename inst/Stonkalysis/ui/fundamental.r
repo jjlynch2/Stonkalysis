@@ -12,13 +12,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						br(),
 						uiOutput("profile2")
 					,width=12),
-					sidebarPanel(
-						uiOutput("ownership_title"),
-						uiOutput("instutitional_ui_plot"),
-						tableOutput("ownership")
-					,width=12)
-				),
-				column(6,
 					fluidRow(
 						column(6,
 							sidebarPanel(
@@ -39,19 +32,22 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						),
 						column(6,
 							sidebarPanel(
-								tableOutput("am_4"),
-								br(),
-								br(),
-								br(),
-								br(),
-								br(),
-								br(),
-								br(),
-								br(),
-								br()
+								tableOutput("am_4")
 							,width=12)
 						)
-					),
+					)
+				),
+				column(6,
+					sidebarPanel(
+						uiOutput("ownership_title"),
+						uiOutput("instutitional_ui_plot"),
+						tableOutput("ownership")
+					,width=12),
+					sidebarPanel(
+						uiOutput("fund_title"),
+						uiOutput("fund_ui_plot"),
+						tableOutput("fund")
+					,width=12),
 					sidebarPanel(
 						uiOutput("insider_title"),
 						uiOutput("ownership_ui_plot"),
@@ -74,7 +70,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 							column(1,
 								uiOutput("plotly_color2")
 							),
-							column(3,
+							column(8,
 								uiOutput("plotly_control_ui2")
 							)
 						),
