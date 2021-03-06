@@ -159,7 +159,33 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br()
 				),
 				tabPanel("Cash Statement",
-					br()
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("operating_cashflow"),
+								uiOutput("operating_cashflow_plot"),
+								br(),
+								uiOutput("operating_cashflow_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("investing_cashflow"),
+								uiOutput("investing_cashflow_plot"),
+								br(),
+								uiOutput("investing_cashflow_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("financing_cashflow"),
+								uiOutput("financing_cashflow_plot"),
+								br(),
+								uiOutput("financing_cashflow_table")
+							,width=12)
+						),
+					)
 				)
 			)
 		),
@@ -171,6 +197,9 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		),
 		tabPanel("DDM",
 			br()
+		),
+		tabPanel("Custom Plot",
+		
 		)
 	)
 
