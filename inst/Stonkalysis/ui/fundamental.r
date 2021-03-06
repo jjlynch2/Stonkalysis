@@ -7,7 +7,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				column(6,
 					sidebarPanel(
 						uiOutput("profile1_title"),
-						br(),
 						tableOutput("profile1"),
 						br(),
 						uiOutput("profile2")
@@ -57,6 +56,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			)
 		),
 		tabPanel("Historical Data",
+			br(),
 			fluidRow(
 				column(12,
 					sidebarPanel(
@@ -90,6 +90,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			)
 		),
 		tabPanel("Historical Volatility",
+			br(),
 			fluidRow(
 				column(12,
 					sidebarPanel(
@@ -122,10 +123,55 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		), #provide volatility graph and table for open, close, high, low, etc, see market Chameleon for example
 		
 		###each one will have raw data tables + graphs + regression predictions? Make sure to allow user select of years with a selectizeInput somewhere. 
-		tabPanel("Annual Metrics"),
-		tabPanel("Quarterly Metrics"),
-		tabPanel("DCF"),
-		tabPanel("DDM")
+		tabPanel("Annual",
+			br(),
+			tabsetPanel(
+				tabPanel("Income Statement",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("netincome"),
+								uiOutput("income_plots"),
+								br(),
+								uiOutput("income_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("operating"),
+								uiOutput("operating_plots"),
+								br(),
+								uiOutput("operating_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("revenue"),
+								uiOutput("revenue_plots"),
+								br(),
+								uiOutput("revenue_table")
+							,width=12)
+						)
+					)
+				),
+				tabPanel("Balance Statement",
+					br()
+				),
+				tabPanel("Cash Statement",
+					br()
+				)
+			)
+		),
+		tabPanel("Quarterly",
+			br()
+		),
+		tabPanel("DCF",
+			br()
+		),
+		tabPanel("DDM",
+			br()
+		)
 	)
 
 )

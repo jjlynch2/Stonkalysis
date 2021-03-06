@@ -5,6 +5,7 @@ source(system.file("Stonkalysis/ui", 'fundamental.r', package = "Stonkalysis"), 
 source(system.file("Stonkalysis/ui", 'financial.r', package = "Stonkalysis"), local=TRUE)
 source(system.file("Stonkalysis/ui", 'comparison.r', package = "Stonkalysis"), local=TRUE)
 source(system.file("Stonkalysis/ui", 'technical.r', package = "Stonkalysis"), local=TRUE)
+source(system.file("Stonkalysis/ui", 'notes.r', package = "Stonkalysis"), local=TRUE)
 
 ui <- dashboardPage(skin = "blue",
 	dashboardHeader(
@@ -19,7 +20,8 @@ ui <- dashboardPage(skin = "blue",
 			menuItem("Fundamental", tabName = "Fundamental", icon = icon("calculator")),
 			menuItem("Financial", tabName = "Financial", icon = icon("money-bill-wave")),
 			menuItem("Comparison", tabName = "Comparison", icon = icon("balance-scale-left")),
-			menuItem("Technical", tabName = "Technical", icon = icon("chart-bar"))
+			menuItem("Technical", tabName = "Technical", icon = icon("chart-bar")),
+			menuItem("Notes", tabName = "Technical", icon = icon("pen"))
 		),
 		width = 150
 	),

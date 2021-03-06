@@ -6,4 +6,5 @@ server <- function(input, output) {
 	source(system.file("Stonkalysis/server", 'fundamental.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'financial.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'cache_system.r', package = "Stonkalysis"), local=TRUE)
+	source(system.file("Stonkalysis/server", 'notes.r', package = "Stonkalysis"), local=TRUE)
 }

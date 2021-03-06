@@ -753,3 +753,150 @@ output$chart_table_v <- DT::renderDataTable ({
 	DT::datatable(chart_data_table_v$chart_data_table_v, options = list(lengthMenu = c(5,10,15,20,25,50,100,200), pageLength = 15, scrollX=TRUE), rowname = TRUE)
 })
 ###chart table
+
+####Income
+output$netincome <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Net Income</font></h3></strong>")
+})
+
+
+output$income_plots <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$income_plot <- renderPlot({
+				income <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(income)) {
+					p_df <- rbind(p_df, data.frame(income[[o]]$incomeNet, income[[o]]$fiscalYear))			 
+				}
+				colnames(p_df) <- c("Income", "Year")
+				p_df[,2] <- as.character(p_df[,2])
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="Net Income")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("income_plot")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$income_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		output$income_table <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+				income <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(income)) {
+					p_df <- rbind(p_df, data.frame(income[[o]]$fiscalYear, income[[o]]$incomeNet, yoy = NA, yoyv = NA))
+					if (o > 1) {
+						p_df[o,4] = paste(round(((p_df[o,2] - p_df[(o-1),2]) / p_df[(o-1),2]) * 100, digits = 2), "%", sep="")
+						p_df[o,3] = p_df[o,2] - p_df[(o-1),2]
+					} 			 
+				}
+				colnames(p_df) <- c("Fiscal Year", "Net Income", "YoY", "YoY %")
+				p_df[,1] <- as.character(p_df[,1])
+				p_df[,2] <- as.character(p_df[,2])
+				p_df[,3] <- as.character(p_df[,3])
+				p_df[,4] <- as.character(p_df[,4])
+				return(p_df)
+		}) 
+		tableOutput("income_table")
+	} else {
+		HTML("No income reported")
+	}
+})
+
+
+
+output$revenue <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Total Revenue</font></h3></strong>")
+})
+
+output$revenue_plots <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$revenue_plot <- renderPlot({
+				revenue <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(revenue)) {
+					p_df <- rbind(p_df, data.frame(revenue[[o]]$revenue, revenue[[o]]$fiscalYear))			 
+				}
+				colnames(p_df) <- c("Revenue", "Year")
+				p_df[,2] <- as.character(p_df[,2])
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="Total Revenue")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("revenue_plot")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$revenue_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		output$revenue_table <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+				revenue <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(revenue)) {
+					p_df <- rbind(p_df, data.frame(revenue[[o]]$fiscalYear, revenue[[o]]$revenue, yoy = NA, yoyv = NA))
+					if (o > 1) {
+						p_df[o,4] = paste(round(((p_df[o,2] - p_df[(o-1),2]) / p_df[(o-1),2]) * 100, digits = 2), "%", sep="")
+						p_df[o,3] = p_df[o,2] - p_df[(o-1),2]
+					} 			 
+				}
+				colnames(p_df) <- c("Fiscal Year", "Total Revenue", "YoY", "YoY %")
+				p_df[,1] <- as.character(p_df[,1])
+				p_df[,2] <- as.character(p_df[,2])
+				p_df[,3] <- as.character(p_df[,3])
+				p_df[,4] <- as.character(p_df[,4])
+				return(p_df)
+		}) 
+		tableOutput("revenue_table")
+	} else {
+		HTML("No revenue reported")
+	}
+})
+
+
+output$operating <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Operating Income</font></h3></strong>")
+})
+
+output$operating_plots <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$operating_plot <- renderPlot({
+				operating <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(operating)) {
+					p_df <- rbind(p_df, data.frame(operating[[o]]$incomeOperating, operating[[o]]$fiscalYear))			 
+				}
+				colnames(p_df) <- c("Operating", "Year")
+				p_df[,2] <- as.character(p_df[,2])
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="Operating Income")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("operating_plot")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$operating_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		output$operating_table <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+				operating <- ticker_df$ticker_df[[1]][[1]]
+				p_df <- data.frame()
+				for(o in 1:length(operating)) {
+					p_df <- rbind(p_df, data.frame(operating[[o]]$fiscalYear, operating[[o]]$incomeOperating, yoy = NA, yoyv = NA))
+					if (o > 1) {
+						p_df[o,4] = paste(round(((p_df[o,2] - p_df[(o-1),2]) / p_df[(o-1),2]) * 100, digits = 2), "%", sep="")
+						p_df[o,3] = p_df[o,2] - p_df[(o-1),2]
+					} 			 
+				}
+				colnames(p_df) <- c("Fiscal Year", "Operating Income", "YoY", "YoY %")
+				p_df[,1] <- as.character(p_df[,1])
+				p_df[,2] <- as.character(p_df[,2])
+				p_df[,3] <- as.character(p_df[,3])
+				p_df[,4] <- as.character(p_df[,4])
+				return(p_df)
+		}) 
+		tableOutput("operating_table")
+	} else {
+		HTML("No operating income reported")
+	}
+})
+####Income
