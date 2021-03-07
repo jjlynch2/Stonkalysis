@@ -156,7 +156,33 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					)
 				),
 				tabPanel("Balance Statement",
-					br()
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("assets_balance"),
+								uiOutput("assets_balance_plot"),
+								br(),
+								uiOutput("assets_balance_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("liabilities_balance"),
+								uiOutput("liabilities_balance_plot"),
+								br(),
+								uiOutput("liabilities_balance_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								uiOutput("debt_to_asset_balance"),
+								uiOutput("debt_to_asset_balance_plot"),
+								br(),
+								uiOutput("debt_to_asset_balance_table")
+							,width=12)
+						),
+					)
 				),
 				tabPanel("Cash Statement",
 					br(),
