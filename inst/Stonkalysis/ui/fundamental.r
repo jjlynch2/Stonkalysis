@@ -126,7 +126,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		tabPanel("Annual",
 			br(),
 			tabsetPanel(
-				tabPanel("Income Statement",
+				tabPanel("Income",
 					br(),
 					fluidRow(
 						column(4,
@@ -155,7 +155,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						)
 					)
 				),
-				tabPanel("Balance Statement",
+				tabPanel("Balance",
 					br(),
 					fluidRow(
 						column(4,
@@ -184,7 +184,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						),
 					)
 				),
-				tabPanel("Cash Statement",
+				tabPanel("Cash",
 					br(),
 					fluidRow(
 						column(4,
@@ -216,7 +216,96 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			)
 		),
 		tabPanel("Quarterly",
-			br()
+			br(),
+			tabsetPanel(
+				tabPanel("Income",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								#uiOutput("netincome"),
+								#uiOutput("income_plots"),
+								br()#,
+								#uiOutput("income_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("operating"),
+								#uiOutput("operating_plots"),
+								br()#,
+								#uiOutput("operating_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("revenue"),
+								#uiOutput("revenue_plots"),
+								br()#,
+								#uiOutput("revenue_table")
+							,width=12)
+						)
+					)
+				),
+				tabPanel("Balance",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								#uiOutput("assets_balance"),
+								#uiOutput("assets_balance_plot"),
+								br()#,
+								#uiOutput("assets_balance_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("liabilities_balance"),
+								#uiOutput("liabilities_balance_plot"),
+								br()#,
+								#uiOutput("liabilities_balance_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("debt_to_asset_balance"),
+								#uiOutput("debt_to_asset_balance_plot"),
+								br()#,
+								#uiOutput("debt_to_asset_balance_table")
+							,width=12)
+						),
+					)
+				),
+				tabPanel("Cash",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								#uiOutput("operating_cashflow"),
+								#uiOutput("operating_cashflow_plot"),
+								br()#,
+								#uiOutput("operating_cashflow_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("investing_cashflow"),
+								#uiOutput("investing_cashflow_plot"),
+								br()#,
+								#uiOutput("investing_cashflow_table")
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								#uiOutput("financing_cashflow"),
+								#uiOutput("financing_cashflow_plot"),
+								br()#,
+								#uiOutput("financing_cashflow_table")
+							,width=12)
+						),
+					)
+				)
+			)
 		),
 		tabPanel("DCF",
 			br()
