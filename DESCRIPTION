@@ -14,7 +14,8 @@ Depends:
 	plotly,
 	dplyr,
 	TTR,
-	colourpicker
+	colourpicker,
+	shinyWidgets
 License: GPL-2
 LazyData: true
 ByteCompile: true
@@ -28,4 +29,5 @@ Imports:
 	plotly,
 	dplyr,
 	TTR,
-	colourpicker
+	colourpicker,
+	shinyWidgets

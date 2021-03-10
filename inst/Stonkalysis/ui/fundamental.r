@@ -131,6 +131,13 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
+								uiOutput("annual_control_income")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
 								uiOutput("netincome"),
 								uiOutput("income_plots"),
 								br(),
@@ -160,6 +167,13 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
+								uiOutput("annual_control_balance")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
 								uiOutput("assets_balance"),
 								uiOutput("assets_balance_plot"),
 								br(),
@@ -186,6 +200,13 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				),
 				tabPanel("Cash",
 					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("annual_control_cash")
+							,width=12)
+						)
+					),
 					fluidRow(
 						column(4,
 							sidebarPanel(
