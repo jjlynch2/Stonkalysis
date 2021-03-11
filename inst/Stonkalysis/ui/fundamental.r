@@ -244,26 +244,33 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								#uiOutput("netincome"),
-								#uiOutput("income_plots"),
-								br()#,
-								#uiOutput("income_table")
+								uiOutput("quarterly_control_income")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("netincome_quarterly"),
+								uiOutput("income_plots_quarterly"),
+								br(),
+								uiOutput("income_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("operating"),
-								#uiOutput("operating_plots"),
-								br()#,
-								#uiOutput("operating_table")
+								uiOutput("operating_quarterly"),
+								uiOutput("operating_plots_quarterly"),
+								br(),
+								uiOutput("operating_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("revenue"),
-								#uiOutput("revenue_plots"),
-								br()#,
-								#uiOutput("revenue_table")
+								uiOutput("revenue_quarterly"),
+								uiOutput("revenue_plots_quarterly"),
+								br(),
+								uiOutput("revenue_table_quarterly")
 							,width=12)
 						)
 					)
@@ -273,26 +280,33 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								#uiOutput("assets_balance"),
-								#uiOutput("assets_balance_plot"),
-								br()#,
-								#uiOutput("assets_balance_table")
+								uiOutput("quarterly_control_balance")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("assets_balance_quarterly"),
+								uiOutput("assets_balance_plot_quarterly"),
+								br(),
+								uiOutput("assets_balance_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("liabilities_balance"),
-								#uiOutput("liabilities_balance_plot"),
-								br()#,
-								#uiOutput("liabilities_balance_table")
+								uiOutput("liabilities_balance_quarterly"),
+								uiOutput("liabilities_balance_plot_quarterly"),
+								br(),
+								uiOutput("liabilities_balance_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("debt_to_asset_balance"),
-								#uiOutput("debt_to_asset_balance_plot"),
-								br()#,
-								#uiOutput("debt_to_asset_balance_table")
+								uiOutput("debt_to_asset_balance_quarterly"),
+								uiOutput("debt_to_asset_balance_plot_quarterly"),
+								br(),
+								uiOutput("debt_to_asset_balance_table_quarterly")
 							,width=12)
 						),
 					)
@@ -302,26 +316,33 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								#uiOutput("operating_cashflow"),
-								#uiOutput("operating_cashflow_plot"),
-								br()#,
-								#uiOutput("operating_cashflow_table")
+								uiOutput("quarterly_control_cash")
+							,width=12)
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("operating_cashflow_quarterly"),
+								uiOutput("operating_cashflow_plot_quarterly"),
+								br(),
+								uiOutput("operating_cashflow_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("investing_cashflow"),
-								#uiOutput("investing_cashflow_plot"),
-								br()#,
-								#uiOutput("investing_cashflow_table")
+								uiOutput("investing_cashflow_quarterly"),
+								uiOutput("investing_cashflow_plot_quarterly"),
+								br(),
+								uiOutput("investing_cashflow_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								#uiOutput("financing_cashflow"),
-								#uiOutput("financing_cashflow_plot"),
-								br()#,
-								#uiOutput("financing_cashflow_table")
+								uiOutput("financing_cashflow_quarterly"),
+								uiOutput("financing_cashflow_plot_quarterly"),
+								br(),
+								uiOutput("financing_cashflow_table_quarterly")
 							,width=12)
 						),
 					)

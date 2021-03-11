@@ -23,4 +23,5 @@ server <- function(input, output) {
 	source(system.file("Stonkalysis/server", 'fundamental_historical.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'fundamental_volatility.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'fundamental_annual.r', package = "Stonkalysis"), local=TRUE)
+	source(system.file("Stonkalysis/server", 'fundamental_quarterly.r', package = "Stonkalysis"), local=TRUE)
 }
