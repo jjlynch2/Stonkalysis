@@ -18,7 +18,7 @@ ui <- dashboardPage(skin = "blue",
 			menuItem("About", tabName = "About", icon = icon("question")),
 			menuItem("Configuration", tabName = "Configuration", icon = icon("cogs")),
 			menuItem("Fundamental", tabName = "Fundamental", icon = icon("calculator")),
-			menuItem("Financial", tabName = "Financial", icon = icon("money-bill-wave")),
+			menuItem("Financial Data", tabName = "Financial", icon = icon("money-bill-wave")),
 			menuItem("Comparison", tabName = "Comparison", icon = icon("balance-scale-left")),
 			menuItem("Technical", tabName = "Technical", icon = icon("chart-bar")),
 			menuItem("Notes", tabName = "Technical", icon = icon("pen"))

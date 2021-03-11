@@ -238,5 +238,5 @@ observeEvent(input$ticker, {
 })
 
 output$chart_table <- DT::renderDataTable ({
-	DT::datatable(chart_data_table$chart_data_table, options = list(lengthMenu = c(5,10,15,20,25,50,100,200), pageLength = 15, scrollX=TRUE), rowname = FALSE)
+	DT::datatable(chart_data_table$chart_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(chart_data_table$chart_data_table)), pageLength = 15, scrollX=TRUE), rowname = FALSE)
 })

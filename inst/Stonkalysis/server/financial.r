@@ -14,7 +14,7 @@ observeEvent(input$ticker, {
 })
 
 output$financial_table_ttm <- DT::renderDataTable ({
-	DT::datatable(ttm_data_table$ttm_data_table, options = list(lengthMenu = c(5,10,15,20,25,50,100,200), pageLength = 15), rowname = TRUE)
+	DT::datatable(ttm_data_table$ttm_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(ttm_data_table$ttm_data_table)), pageLength = 15), rowname = TRUE)
 })
 
 annual_data_table <- reactiveValues(annual_data_table = data.frame(annual = "no annual financial data reported"))
@@ -40,7 +40,7 @@ observeEvent(input$ticker, {
 })
 
 output$financial_table_annual <- DT::renderDataTable ({
-	DT::datatable(annual_data_table$annual_data_table, options = list(lengthMenu = c(5,10,15,20,25,50,100,200), pageLength = 15, scrollX=TRUE), rowname = TRUE)
+	DT::datatable(annual_data_table$annual_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(annual_data_table$annual_data_table)), pageLength = 15, scrollX=TRUE), rowname = TRUE)
 })
 
 quarterly_data_table <- reactiveValues(quarterly_data_table = data.frame(quarterly = "no quarterly financial data reported"))
@@ -66,5 +66,5 @@ observeEvent(input$ticker, {
 })
 
 output$financial_table_quarterly <- DT::renderDataTable ({
-	DT::datatable(quarterly_data_table$quarterly_data_table, options = list(lengthMenu = c(5,10,15,20,25,50,100,200), pageLength = 15, scrollX=TRUE), rowname = TRUE)
+	DT::datatable(quarterly_data_table$quarterly_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(quarterly_data_table$quarterly_data_table)), pageLength = 15, scrollX=TRUE), rowname = TRUE)
 })
