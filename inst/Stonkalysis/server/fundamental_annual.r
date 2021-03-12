@@ -54,7 +54,7 @@ output$income_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Income", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("income_plot")
 	} else {
@@ -104,7 +104,7 @@ output$revenue_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Revenue", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("revenue_plot")
 	} else {
@@ -155,7 +155,7 @@ output$operating_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Operating", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_plot")
 	} else {
@@ -247,7 +247,7 @@ output$operating_cashflow_plot <- renderUI ({
 				}
 				colnames(p_df) <- c("Operating", "Year")
 				p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_cashflow_p")
 	} else {
@@ -297,7 +297,7 @@ output$investing_cashflow_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Investing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("investing_cashflow_p")
 	} else {
@@ -347,7 +347,7 @@ output$financing_cashflow_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Financing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("financing_cashflow_p")
 	} else {
@@ -439,7 +439,7 @@ output$assets_balance_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Assets", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("assets_balance_plot_p")
 	} else {
@@ -489,7 +489,7 @@ output$liabilities_balance_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Liabilities", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = "dodgerblue") + labs(x="Fiscal Year",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("liabilities_balance_plot_p")
 	} else {
@@ -539,7 +539,7 @@ output$debt_to_asset_balance_plot <- renderUI ({
 			} 
 			colnames(p_df) <- c("debttoasset", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_line(aes(x=Year, y=debttoasset), size = 1.5, group = 1, color="dodgerblue") + geom_point(aes(x=Year, y=debttoasset), size = 3, color="black") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_line(aes(x=Year, y=debttoasset), size = 1.5, group = 1, color="#2c3e50") + geom_point(aes(x=Year, y=debttoasset), size = 3, color="black") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("debt_to_asset_balance_plot_p")
 	} else {

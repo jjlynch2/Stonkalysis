@@ -1,7 +1,7 @@
 cache_path <- system.file("extdata/data/", package = "Stonkalysis")
 cache_date_table <- reactiveValues(cache_date_table = data.frame())
 av_tickers <- reactiveValues(av_tickers = list.files(cache_path, recursive = FALSE, full.names=FALSE))
-ticker_choice <- reactiveValues(ticker_choice = getTickers(APIURL, apikey))
+ticker_choice <- reactiveValues(ticker_choice = readTickers(cache_path))
 
 update_table <- function() {
 	showModal(modalDialog(title = "Updating table...", easyClose = FALSE, footer = NULL))
@@ -24,6 +24,11 @@ observeEvent(TRUE, {
 output$api_key <- renderUI({
 	textInput(inputId = "api_key", "API key", value=apikey)
 })
+
+observeEvent(input$update_available_tickers, {
+	updateTickers(cache_path, APIURL, apikey)
+})
+
 observeEvent(input$add_key, {
 	if(input$api_key != apikey) {
 		writeLines(input$api_key, con = system.file("Stonkalysis/server", 'apikey', package = "Stonkalysis"))

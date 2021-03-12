@@ -5,6 +5,7 @@ configuration_ui <- tabItem(tabName = "Configuration",
 			column(3,
 				sidebarPanel(
 					uiOutput("available_tickers"),
+					actionButton("update_available_tickers","Update Tickers", icon = icon("refresh")),
 					actionButton("add_tickers","Add Tickers", icon = icon("plus"))
 				,width=12)
 			),

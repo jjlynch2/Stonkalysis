@@ -26,6 +26,9 @@ ui <- dashboardPage(skin = "blue",
 		width = 150
 	),
 	dashboardBody(
+		tags$head(
+			tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+		),
 		tabItems(
 			about_ui,
 			configuration_ui,
