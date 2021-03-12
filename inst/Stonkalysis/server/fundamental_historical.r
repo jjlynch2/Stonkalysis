@@ -233,9 +233,6 @@ update_table_chart <- function() {
 	}
 }
 
-observeEvent(input$ticker, {
-	update_table_chart()
-})
 
 output$chart_table <- DT::renderDataTable ({
 	DT::datatable(chart_data_table$chart_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(chart_data_table$chart_data_table)), pageLength = 15, scrollX=TRUE), rowname = FALSE)

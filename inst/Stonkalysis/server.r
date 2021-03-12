@@ -1,4 +1,5 @@
-server <- function(input, output) {
+server <- function(session, input, output) {
+	showModal(modalDialog(title = "Loading source code...", easyClose = FALSE, footer = NULL))
 	#API stuff
 	APIURL <- "https://sandbox.iexapis.com/stable"
 	apikey <- readLines(system.file("Stonkalysis/server", 'apikey', package = "Stonkalysis"))
@@ -24,4 +25,5 @@ server <- function(input, output) {
 	source(system.file("Stonkalysis/server", 'fundamental_volatility.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'fundamental_annual.r', package = "Stonkalysis"), local=TRUE)
 	source(system.file("Stonkalysis/server", 'fundamental_quarterly.r', package = "Stonkalysis"), local=TRUE)
+	removeModal()
 }

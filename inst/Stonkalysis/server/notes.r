@@ -1,4 +1,9 @@
-output$notes <- renderUI ({
-	textAreaInput("notes", "", value=, width = "100%", height = "100%")
+notes <- reactiveValues(notes = "test")
 
+output$notes <- renderUI ({
+	aceEditor("ace_notes", value=notes$notes, wordWrap = TRUE, height = "600px", mode = "plain_text", theme = "dawn")
+})
+
+observeEvent(input$ace_notes, {
+	saveNotes(input$ace_notes, input$ticker, cache_path)
 })

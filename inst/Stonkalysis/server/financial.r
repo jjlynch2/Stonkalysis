@@ -9,9 +9,6 @@ update_table_ttm <- function() {
 	}
 }
 
-observeEvent(input$ticker, {
-	update_table_ttm()
-})
 
 output$financial_table_ttm <- DT::renderDataTable ({
 	DT::datatable(ttm_data_table$ttm_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(ttm_data_table$ttm_data_table)), pageLength = 15), rowname = TRUE)
@@ -35,10 +32,6 @@ update_table_annual <- function() {
 	}
 }
 
-observeEvent(input$ticker, {
-	update_table_annual()
-})
-
 output$financial_table_annual <- DT::renderDataTable ({
 	DT::datatable(annual_data_table$annual_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(annual_data_table$annual_data_table)), pageLength = 15, scrollX=TRUE), rowname = TRUE)
 })
@@ -61,9 +54,6 @@ update_table_quarterly <- function() {
 	}
 }
 
-observeEvent(input$ticker, {
-	update_table_quarterly()
-})
 
 output$financial_table_quarterly <- DT::renderDataTable ({
 	DT::datatable(quarterly_data_table$quarterly_data_table, extensions = 'Buttons', options = list(dom = "Blfrtip", buttons = list("copy", list(extend = "collection", buttons = c("csv","excel","pdf"), text = "Download")), lengthMenu = c(5,10,15,20,25,50,100,nrow(quarterly_data_table$quarterly_data_table)), pageLength = 15, scrollX=TRUE), rowname = TRUE)

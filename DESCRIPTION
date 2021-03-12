@@ -15,7 +15,8 @@ Depends:
 	dplyr,
 	TTR,
 	colourpicker,
-	shinyWidgets
+	shinyWidgets,
+	shinyAce
 License: GPL-2
 LazyData: true
 ByteCompile: true
@@ -30,4 +31,5 @@ Imports:
 	dplyr,
 	TTR,
 	colourpicker,
-	shinyWidgets
+	shinyWidgets,
+	shinyAce

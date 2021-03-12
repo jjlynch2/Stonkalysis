@@ -21,7 +21,7 @@ ui <- dashboardPage(skin = "blue",
 			menuItem("Financial Data", tabName = "Financial", icon = icon("money-bill-wave")),
 			menuItem("Comparison", tabName = "Comparison", icon = icon("balance-scale-left")),
 			menuItem("Technical", tabName = "Technical", icon = icon("chart-bar")),
-			menuItem("Notes", tabName = "Technical", icon = icon("pen"))
+			menuItem("Notes", tabName = "Notes", icon = icon("pen"))
 		),
 		width = 150
 	),
@@ -32,7 +32,8 @@ ui <- dashboardPage(skin = "blue",
 			financial_ui,
 			fundamental_ui,
 			comparison_ui,
-			technical_ui
+			technical_ui,
+			notes_ui
 	 	)
 	)
 )
