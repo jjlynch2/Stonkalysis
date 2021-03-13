@@ -120,12 +120,52 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					,width=12)
 				)
 			)
-		), #provide volatility graph and table for open, close, high, low, etc, see market Chameleon for example
-		
-		###each one will have raw data tables + graphs + regression predictions? Make sure to allow user select of years with a selectizeInput somewhere. 
+		),
 		tabPanel("Annual",
 			br(),
 			tabsetPanel(
+				tabPanel("General Metrics",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("eps_range")
+							,width=12),
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								uiOutput("eps_title"),
+								uiOutput("eps_plot"),
+								br(),
+								uiOutput("eps_table")
+							,width=12),
+							sidebarPanel(
+								br()         #ROE
+							,width=12),
+							sidebarPanel(
+								br()         #ROA
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								br()       #Net Margin
+							,width=12),
+							sidebarPanel(
+								br()      #BVPS
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								br()      #CRPS
+							,width=12),
+							sidebarPanel(
+								br()       #CFPS
+							,width=12)
+						)
+					)
+				),
 				tabPanel("Income",
 					br(),
 					fluidRow(
@@ -239,6 +279,45 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		tabPanel("Quarterly",
 			br(),
 			tabsetPanel(
+				tabPanel("General Metrics",
+					br(),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								br()       #plot controls
+							,width=12),
+						)
+					),
+					fluidRow(
+						column(4,
+							sidebarPanel(
+								br()         #EPS
+							,width=12),
+							sidebarPanel(
+								br()         #ROE
+							,width=12),
+							sidebarPanel(
+								br()         #ROA
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								br()       #Net Margin
+							,width=12),
+							sidebarPanel(
+								br()      #BVPS
+							,width=12)
+						),
+						column(4,
+							sidebarPanel(
+								br()      #CRPS
+							,width=12),
+							sidebarPanel(
+								br()       #CFPS
+							,width=12)
+						)
+					)
+				),
 				tabPanel("Income",
 					br(),
 					fluidRow(

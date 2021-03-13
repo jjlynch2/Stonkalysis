@@ -54,7 +54,7 @@ output$income_plots_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Income", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Income), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Income), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("income_plot_quarterly")
 	} else {
@@ -104,7 +104,7 @@ output$revenue_plots_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Revenue", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("revenue_plot_quarterly")
 	} else {
@@ -155,7 +155,7 @@ output$operating_plots_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Operating", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_plot_quarterly")
 	} else {
@@ -247,7 +247,7 @@ output$operating_cashflow_plot_quarterly <- renderUI ({
 				}
 				colnames(p_df) <- c("Operating", "Quarter")
 				p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-				ggplot(p_df) + geom_bar(aes(x=Quarter, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+				ggplot(p_df) + geom_bar(aes(x=Quarter, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_cashflow_p_quarterly")
 	} else {
@@ -297,7 +297,7 @@ output$investing_cashflow_plot_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Investing", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("investing_cashflow_p_quarterly")
 	} else {
@@ -347,7 +347,7 @@ output$financing_cashflow_plot_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Financing", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("financing_cashflow_p_quarterly")
 	} else {
@@ -439,7 +439,7 @@ output$assets_balance_plot_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Assets", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("assets_balance_plot_p_quarterly")
 	} else {
@@ -489,7 +489,7 @@ output$liabilities_balance_plot_quarterly <- renderUI ({
 			}
 			colnames(p_df) <- c("Liabilities", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Quarter",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("liabilities_balance_plot_p_quarterly")
 	} else {
@@ -539,7 +539,7 @@ output$debt_to_asset_balance_plot_quarterly <- renderUI ({
 			} 
 			colnames(p_df) <- c("debttoasset", "Quarter")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_line(aes(x=Quarter, y=debttoasset), size = 1.5, group = 1, color="#2c3e50") + geom_point(aes(x=Quarter, y=debttoasset), size = 3, color="black") + labs(x="Fiscal Quarter",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Quarter, y=debttoasset), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("debt_to_asset_balance_plot_p_quarterly")
 	} else {
@@ -553,12 +553,23 @@ output$debt_to_asset_balance_table_quarterly <- renderUI ({
 		range <- quarterly_range_balance$quarterly_range_balance
 		output$debt_to_asset_balance_table_render_quarterly <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
+			oi <- 1
 			for(o in range) {
-				p_df <- rbind(p_df, data.frame(paste(debt_to_asset_balance_table_df[[o]]$fiscalYear, debt_to_asset_balance_table_df[[o]]$fiscalQuarter, sep=":"), paste(round((debt_to_asset_balance_table_df[[o]]$liabilities / debt_to_asset_balance_table_df[[o]]$assetsUnadjusted),digits=2) * 100,"%",sep="")))	 
+				p_df <- rbind(p_df, data.frame(paste(debt_to_asset_balance_table_df[[o]]$fiscalYear, debt_to_asset_balance_table_df[[o]]$fiscalQuarter, sep=":"), round((debt_to_asset_balance_table_df[[o]]$liabilities / debt_to_asset_balance_table_df[[o]]$assetsUnadjusted),digits=2) * 100, yoy = NA, yoyv = NA))	 
+				if (oi > 1) {
+					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
+					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
+				} 	
+				oi <- oi + 1
 			}
-			colnames(p_df) <- c("Fiscal Quarter", "Debt to Asset Ratio")
+			for(o in 1:nrow(p_df)) {
+				p_df[o,2] <- paste(p_df[o,2], "%", sep="")
+			}
+			colnames(p_df) <- c("Fiscal Quarter", "Debt to Asset Ratio", "YoY", "YoY %")
 			p_df[,1] <- as.character(p_df[,1])
 			p_df[,2] <- as.character(p_df[,2])
+			p_df[,3] <- as.character(p_df[,3])
+			p_df[,4] <- as.character(p_df[,4])
 			return(p_df)
 		}) 
 		tableOutput("debt_to_asset_balance_table_render_quarterly")

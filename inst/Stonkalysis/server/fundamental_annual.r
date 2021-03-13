@@ -54,7 +54,7 @@ output$income_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Income", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("income_plot")
 	} else {
@@ -104,7 +104,7 @@ output$revenue_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Revenue", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("revenue_plot")
 	} else {
@@ -155,7 +155,7 @@ output$operating_plots <- renderUI ({
 			}
 			colnames(p_df) <- c("Operating", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_plot")
 	} else {
@@ -247,7 +247,7 @@ output$operating_cashflow_plot <- renderUI ({
 				}
 				colnames(p_df) <- c("Operating", "Year")
 				p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_cashflow_p")
 	} else {
@@ -297,7 +297,7 @@ output$investing_cashflow_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Investing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("investing_cashflow_p")
 	} else {
@@ -347,7 +347,7 @@ output$financing_cashflow_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Financing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("financing_cashflow_p")
 	} else {
@@ -439,7 +439,7 @@ output$assets_balance_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Assets", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("assets_balance_plot_p")
 	} else {
@@ -489,7 +489,7 @@ output$liabilities_balance_plot <- renderUI ({
 			}
 			colnames(p_df) <- c("Liabilities", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="Fiscal Year",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("liabilities_balance_plot_p")
 	} else {
@@ -539,7 +539,7 @@ output$debt_to_asset_balance_plot <- renderUI ({
 			} 
 			colnames(p_df) <- c("debttoasset", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_line(aes(x=Year, y=debttoasset), size = 1.5, group = 1, color="#2c3e50") + geom_point(aes(x=Year, y=debttoasset), size = 3, color="black") + labs(x="Fiscal Year",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=debttoasset), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("debt_to_asset_balance_plot_p")
 	} else {
@@ -553,16 +553,128 @@ output$debt_to_asset_balance_table <- renderUI ({
 		range <- annual_range_balance$annual_range_balance
 		output$debt_to_asset_balance_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
+			oi <- 1
 			for(o in range) {
-				p_df <- rbind(p_df, data.frame(debt_to_asset_balance_table_df[[o]]$fiscalYear, paste(round((debt_to_asset_balance_table_df[[o]]$liabilities / debt_to_asset_balance_table_df[[o]]$assetsUnadjusted),digits=2) * 100,"%",sep="")))	 
+				p_df <- rbind(p_df, data.frame(debt_to_asset_balance_table_df[[o]]$fiscalYear, round((debt_to_asset_balance_table_df[[o]]$liabilities / debt_to_asset_balance_table_df[[o]]$assetsUnadjusted),digits=2) * 100, yoy = NA, yoyv = NA))	 
+				if (oi > 1) {
+					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
+					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
+				} 	
+				oi <- oi + 1
 			}
-			colnames(p_df) <- c("Fiscal Year", "Debt to Asset Ratio")
+			for(o in 1:nrow(p_df)) {
+				p_df[o,2] <- paste(p_df[o,2], "%", sep="")
+			}
+			colnames(p_df) <- c("Fiscal Year", "Debt to Asset Ratio", "YoY", "YoY %")
 			p_df[,1] <- as.character(p_df[,1])
 			p_df[,2] <- as.character(p_df[,2])
+			p_df[,3] <- as.character(p_df[,3])
+			p_df[,4] <- as.character(p_df[,4])
 			return(p_df)
 		}) 
 		tableOutput("debt_to_asset_balance_table_render")
 	} else {
 		HTML("Debt to asset ratio could not be calculated")
+	}
+})
+
+
+
+
+
+#########################
+
+
+
+eps_range <- reactiveValues(eps_range = c(1:2))
+
+output$eps_range <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		years_length <- ticker_df$ticker_df[[1]][[1]]
+		years <- c()
+		for(i in 1:length(years_length)) {
+			years <- c(years, years_length[[i]]$fiscalYear)
+		}
+		sliderTextInput("eps_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
+	} else {
+		HTML("")
+	}
+})
+
+observeEvent(input$eps_control, {
+	years_length <- ticker_df$ticker_df[[1]][[1]]
+	years_index <- c()
+	year_true <- FALSE
+	for(i in 1:length(years_length)) {
+		if(years_length[[i]]$fiscalYear == input$eps_control[1]) {
+			year_true <- TRUE
+		}
+		if(year_true) {
+			years_index <- c(years_index, i)
+		}
+		if(years_length[[i]]$fiscalYear == input$eps_control[2]) {
+			break
+		}
+	}
+	
+	if(length(years_index) == 1) {
+		if(years_index == 1) {
+			eps_range$eps_range <- c(1:2)
+		} else {
+			eps_range$eps_range <- c((years_index[1] - 1), years_index[1])
+		}
+	} else {
+		eps_range$eps_range <- years_index
+	}
+})
+
+output$eps_title <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Earnings per Share</font></h3></strong>")
+})
+
+output$eps_plot <- renderUI ({
+	eps_df <- ticker_df$ticker_df[[1]][[1]]
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$eps_plot_p <- renderPlot({
+			p_df <- data.frame()
+			for(o in eps_range$eps_range) {
+				p_df <- rbind(p_df, data.frame(round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$stockCommon,digits=2) , eps_df[[o]]$fiscalYear))			 
+			} 
+			colnames(p_df) <- c("EPS", "Year")
+			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
+			ggplot(p_df) + geom_bar(aes(x=Year, y=EPS), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("eps_plot_p")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$eps_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		eps_df <- ticker_df$ticker_df[[1]][[1]]
+		range <- eps_range$eps_range
+		output$eps_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+			p_df <- data.frame()
+			oi <- 1
+			for(o in range) {
+				p_df <- rbind(p_df, data.frame(eps_df[[o]]$fiscalYear, round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$stockCommon,digits=2), yoy = NA, yoyv = NA))			 
+				if (oi > 1) {
+					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
+					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
+				} 	
+				oi <- oi + 1
+			}
+			colnames(p_df) <- c("Fiscal Year", "Earings per Share", "YoY", "YoY %")
+			p_df[,1] <- as.character(p_df[,1])
+			p_df[,2] <- as.character(p_df[,2])
+			p_df[,3] <- as.character(p_df[,3])
+			p_df[,4] <- as.character(p_df[,4])
+			return(p_df)
+			return(p_df)
+		}) 
+		tableOutput("eps_table_render")
+	} else {
+		HTML("Earnings per share could not be calculated")
 	}
 })

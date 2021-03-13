@@ -101,7 +101,7 @@ output$instutitional_ui_plot <- renderUI ({
 				for(o in 1:nrow(pie_df)) {
 					pie_df[o,3] <- round(100*(pie_df[o,2] / totalp), digits=0)
 				}
-				ggplot(pie_df, aes(x=Institution, y=Holding, fill=Institution)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
+				ggplot(pie_df, aes(x=Institution, y=Holding, fill=Institution)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.y = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
 		})
 		plotOutput("institutional_plot")
 	} else {
@@ -121,7 +121,7 @@ output$fund_ui_plot <- renderUI ({
 				for(o in 1:nrow(pie_df)) {
 					pie_df[o,3] <- round(100*(pie_df[o,2] / totalp), digits=0)
 				}
-				ggplot(pie_df, aes(x=Fund, y=Holding, fill=Fund)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
+				ggplot(pie_df, aes(x=Fund, y=Holding, fill=Fund)) + geom_bar(stat="identity") + labs(x="",y="Holding")  + theme(axis.text.y = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x =element_blank(), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) + geom_text(aes(label = paste0(Holdingp, "%")), position = position_stack(vjust=0.5))
 		})
 		plotOutput("fund_plot")
 	} else {
@@ -139,7 +139,7 @@ output$ownership_ui_plot <- renderUI ({
 					bar_df <- rbind(bar_df, data.frame(Name = company_ownership[[o]]$fullName, Traded = company_ownership[[o]]$totalSold, Group = "Sold"))
 				}
 				bar_df <- bar_df[-1,]
-				ggplot(bar_df, aes(x=Name, y=Traded, fill=Group)) + geom_bar(stat="identity") + coord_flip() + labs(x="",y="") + theme(plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) +   scale_fill_manual(values=c("#008000", "#FF0000"))
+				ggplot(bar_df, aes(x=Name, y=Traded, fill=Group)) + geom_bar(stat="identity") + coord_flip() + labs(x="",y="") + theme(axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.background = element_rect(fill="#f5f5f5")) +   scale_fill_manual(values=c("#008000", "#FF0000"))
 		})
 		plotOutput("ownership_plot")
 	} else {

@@ -26,7 +26,9 @@ output$api_key <- renderUI({
 })
 
 observeEvent(input$update_available_tickers, {
-	updateTickers(cache_path, APIURL, apikey)
+	showModal(modalDialog(title = "Updating available tickers from API....", easyClose = FALSE, footer = NULL))
+	ticker_choice$ticker_choice <- updateTickers(cache_path, APIURL, apikey)
+	removeModal()
 })
 
 observeEvent(input$add_key, {

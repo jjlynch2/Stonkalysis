@@ -78,4 +78,5 @@ readTickers <- function(cache_path) {
 updateTickers <- function(cache_path, APIURL, apikey) {
 	available_tickers <- getTickers(APIURL, apikey)
 	saveRDS(available_tickers, paste(cache_path, "/tickers.Rds",sep=""))
+	return(available_tickers)
 }
