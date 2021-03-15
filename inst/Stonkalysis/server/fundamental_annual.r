@@ -586,45 +586,45 @@ output$debt_to_asset_balance_table <- renderUI ({
 
 
 
-eps_range <- reactiveValues(eps_range = c(1:2))
+metric_range <- reactiveValues(metric_range = c(1:2))
 
-output$eps_range <- renderUI ({
+output$metric_range <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		years_length <- ticker_df$ticker_df[[1]][[1]]
 		years <- c()
 		for(i in 1:length(years_length)) {
 			years <- c(years, years_length[[i]]$fiscalYear)
 		}
-		sliderTextInput("eps_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
+		sliderTextInput("metric_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
 	} else {
 		HTML("")
 	}
 })
 
-observeEvent(input$eps_control, {
+observeEvent(input$metric_control, {
 	years_length <- ticker_df$ticker_df[[1]][[1]]
 	years_index <- c()
 	year_true <- FALSE
 	for(i in 1:length(years_length)) {
-		if(years_length[[i]]$fiscalYear == input$eps_control[1]) {
+		if(years_length[[i]]$fiscalYear == input$metric_control[1]) {
 			year_true <- TRUE
 		}
 		if(year_true) {
 			years_index <- c(years_index, i)
 		}
-		if(years_length[[i]]$fiscalYear == input$eps_control[2]) {
+		if(years_length[[i]]$fiscalYear == input$metric_control[2]) {
 			break
 		}
 	}
 	
 	if(length(years_index) == 1) {
 		if(years_index == 1) {
-			eps_range$eps_range <- c(1:2)
+			metric_range$metric_range <- c(1:2)
 		} else {
-			eps_range$eps_range <- c((years_index[1] - 1), years_index[1])
+			metric_range$metric_range <- c((years_index[1] - 1), years_index[1])
 		}
 	} else {
-		eps_range$eps_range <- years_index
+		metric_range$metric_range <- years_index
 	}
 })
 
@@ -637,8 +637,8 @@ output$eps_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$eps_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in eps_range$eps_range) {
-				p_df <- rbind(p_df, data.frame(round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$stockCommon,digits=2) , eps_df[[o]]$fiscalYear))			 
+			for(o in metric_range$metric_range) {
+				p_df <- rbind(p_df, data.frame(round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$sharesOutstandingPeDateBs,digits=2) , eps_df[[o]]$fiscalYear))			 
 			} 
 			colnames(p_df) <- c("EPS", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
@@ -651,14 +651,15 @@ output$eps_plot <- renderUI ({
 })
 
 output$eps_table <- renderUI ({
+
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		eps_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- eps_range$eps_range
+		range <- metric_range$metric_range
 		output$eps_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
 			for(o in range) {
-				p_df <- rbind(p_df, data.frame(eps_df[[o]]$fiscalYear, round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$stockCommon,digits=2), yoy = NA, yoyv = NA))			 
+				p_df <- rbind(p_df, data.frame(eps_df[[o]]$fiscalYear, round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$sharesOutstandingPeDateBs,digits=2), yoy = NA, yoyv = NA))			 
 				if (oi > 1) {
 					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
 					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
@@ -676,5 +677,117 @@ output$eps_table <- renderUI ({
 		tableOutput("eps_table_render")
 	} else {
 		HTML("Earnings per share could not be calculated")
+	}
+})
+
+
+
+##############
+
+
+output$roe_title <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Return on Equity</font></h3></strong>")
+})
+
+output$roe_plot <- renderUI ({
+	roe_df <- ticker_df$ticker_df[[1]][[1]]
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$roe_plot_p <- renderPlot({
+			p_df <- data.frame()
+			for(o in metric_range$metric_range) {
+				p_df <- rbind(p_df, data.frame(round(roe_df[[o]]$incomeNet / roe_df[[o]]$equityShareholder,digits=2) , roe_df[[o]]$fiscalYear))			 
+			} 
+			colnames(p_df) <- c("ROE", "Year")
+			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
+			ggplot(p_df) + geom_bar(aes(x=Year, y=ROE), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("roe_plot_p")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$roe_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		roe_df <- ticker_df$ticker_df[[1]][[1]]
+		range <- metric_range$metric_range
+		output$roe_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+			p_df <- data.frame()
+			oi <- 1
+			for(o in range) {
+				p_df <- rbind(p_df, data.frame(roe_df[[o]]$fiscalYear, round(roe_df[[o]]$incomeNet / roe_df[[o]]$equityShareholder,digits=2), yoy = NA, yoyv = NA))			 
+				if (oi > 1) {
+					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
+					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
+				} 	
+				oi <- oi + 1
+			}
+			colnames(p_df) <- c("Fiscal Year", "Return on Equity", "YoY", "YoY %")
+			p_df[,1] <- as.character(p_df[,1])
+			p_df[,2] <- as.character(p_df[,2])
+			p_df[,3] <- as.character(p_df[,3])
+			p_df[,4] <- as.character(p_df[,4])
+			return(p_df)
+			return(p_df)
+		}) 
+		tableOutput("roe_table_render")
+	} else {
+		HTML("Return on equity could not be calculated")
+	}
+})
+
+
+
+########
+
+
+output$roa_title <- renderUI({
+	HTML("<strong><h3><font color=\"#000000\">Return on Assets</font></h3></strong>")
+})
+
+output$roa_plot <- renderUI ({
+	roa_df <- ticker_df$ticker_df[[1]][[1]]
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		output$roa_plot_p <- renderPlot({
+			p_df <- data.frame()
+			for(o in metric_range$metric_range) {
+				p_df <- rbind(p_df, data.frame(round(roa_df[[o]]$incomeNet / roa_df[[o]]$assetsUnadjusted,digits=2) , roa_df[[o]]$fiscalYear))			 
+			} 
+			colnames(p_df) <- c("ROA", "Year")
+			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
+			ggplot(p_df) + geom_bar(aes(x=Year, y=ROA), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+		}) 
+		plotOutput("roa_plot_p")
+	} else {
+		HTML("<br>")
+	}
+})
+
+output$roa_table <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
+		roa_df <- ticker_df$ticker_df[[1]][[1]]
+		range <- metric_range$metric_range
+		output$roa_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
+			p_df <- data.frame()
+			oi <- 1
+			for(o in range) {
+				p_df <- rbind(p_df, data.frame(roa_df[[o]]$fiscalYear, round(roa_df[[o]]$incomeNet / roa_df[[o]]$assetsUnadjusted,digits=2), yoy = NA, yoyv = NA))			 
+				if (oi > 1) {
+					p_df[oi,4] = paste(round(((p_df[oi,2] - p_df[(oi-1),2]) / p_df[(oi-1),2]) * 100, digits = 2), "%", sep="")
+					p_df[oi,3] = p_df[oi,2] - p_df[(oi-1),2]
+				} 	
+				oi <- oi + 1
+			}
+			colnames(p_df) <- c("Fiscal Year", "Return on Assets", "YoY", "YoY %")
+			p_df[,1] <- as.character(p_df[,1])
+			p_df[,2] <- as.character(p_df[,2])
+			p_df[,3] <- as.character(p_df[,3])
+			p_df[,4] <- as.character(p_df[,4])
+			return(p_df)
+			return(p_df)
+		}) 
+		tableOutput("roa_table_render")
+	} else {
+		HTML("Return on assets could not be calculated")
 	}
 })

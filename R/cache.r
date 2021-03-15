@@ -66,9 +66,9 @@ updateCached <- function(cache_path, APIURL, apikey) {
 
 #read from cache the available ticker list
 readTickers <- function(cache_path) {
-	file_list <- list.files(paste(cache_path, "/tickers.Rds",sep=""))
-	if(length(file_list) > 0) {
-		cache_date <- readRDS(file=paste(cache_path, "/tickers.Rds",sep=""))
+	if(file.exists(paste(cache_path, "../tickers.Rds",sep=""))) {
+		available_tickers <- readRDS(file=paste(cache_path, "../tickers.Rds",sep=""))
+		return(available_tickers)
 	} else {
 		return("Please update available tickers")
 	}
@@ -77,6 +77,6 @@ readTickers <- function(cache_path) {
 #update the local cache with new available ticker list from API
 updateTickers <- function(cache_path, APIURL, apikey) {
 	available_tickers <- getTickers(APIURL, apikey)
-	saveRDS(available_tickers, paste(cache_path, "/tickers.Rds",sep=""))
+	saveRDS(available_tickers, file=paste(cache_path, "../tickers.Rds",sep=""))
 	return(available_tickers)
 }

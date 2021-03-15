@@ -129,7 +129,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								uiOutput("eps_range")
+								uiOutput("metric_range")
 							,width=12),
 						)
 					),
@@ -140,30 +140,42 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 								uiOutput("eps_plot"),
 								br(),
 								uiOutput("eps_table")
-							,width=12),
-							sidebarPanel(
-								br()         #ROE
-							,width=12),
-							sidebarPanel(
-								br()         #ROA
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								br()       #Net Margin
-							,width=12),
-							sidebarPanel(
-								br()      #BVPS
+								uiOutput("roe_title"),
+								uiOutput("roe_plot"),
+								br(),
+								uiOutput("roe_table")
 							,width=12)
+						
 						),
 						column(4,
 							sidebarPanel(
-								br()      #CRPS
-							,width=12),
-							sidebarPanel(
-								br()       #CFPS
+								uiOutput("roa_title"),
+								uiOutput("roa_plot"),
+								br(),
+								uiOutput("roa_table")
 							,width=12)
 						)
+					
+					#	column(4,
+					#		sidebarPanel(
+					#			br()       #Net Margin
+					#		,width=12),
+					#		sidebarPanel(
+					#			br()      #BVPS
+					#		,width=12)
+					#	),
+					#	column(4,
+					#		sidebarPanel(
+					#			br()      #CRPS
+					#		,width=12),
+					#		sidebarPanel(
+					#			br()       #CFPS
+					#		,width=12)
+					#	)
 					)
 				),
 				tabPanel("Income",
@@ -284,38 +296,53 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								br()       #plot controls
+								uiOutput("metric_range_quarterly")
 							,width=12),
 						)
 					),
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								br()         #EPS
-							,width=12),
-							sidebarPanel(
-								br()         #ROE
-							,width=12),
-							sidebarPanel(
-								br()         #ROA
+								uiOutput("eps_title_quarterly"),
+								uiOutput("eps_plot_quarterly"),
+								br(),
+								uiOutput("eps_table_quarterly")
 							,width=12)
 						),
 						column(4,
 							sidebarPanel(
-								br()       #Net Margin
-							,width=12),
-							sidebarPanel(
-								br()      #BVPS
+								uiOutput("roe_title_quarterly"),
+								uiOutput("roe_plot_quarterly"),
+								br(),
+								uiOutput("roe_table_quarterly")
 							,width=12)
+						
 						),
 						column(4,
 							sidebarPanel(
-								br()      #CRPS
-							,width=12),
-							sidebarPanel(
-								br()       #CFPS
+								uiOutput("roa_title_quarterly"),
+								uiOutput("roa_plot_quarterly"),
+								br(),
+								uiOutput("roa_table_quarterly")
 							,width=12)
 						)
+					
+					#	column(4,
+					#		sidebarPanel(
+					#			br()       #Net Margin
+					#		,width=12),
+					#		sidebarPanel(
+					#			br()      #BVPS
+					#		,width=12)
+					#	),
+					#	column(4,
+					#		sidebarPanel(
+					#			br()      #CRPS
+					#		,width=12),
+					#		sidebarPanel(
+					#			br()       #CFPS
+					#		,width=12)
+					#	)
 					)
 				),
 				tabPanel("Income",
