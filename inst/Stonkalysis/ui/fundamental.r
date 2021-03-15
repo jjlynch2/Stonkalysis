@@ -108,7 +108,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						fluidRow(
 							uiOutput("table_title"),
 							uiOutput("plotly_chart_ui_v_p")
-						),
+						)
 					,width=12)
 				)
 			),
@@ -123,16 +123,23 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		),
 		tabPanel("Annual",
 			br(),
+			fluidRow(
+				column(4,
+					sidebarPanel(
+						fluidRow(
+							column(8,
+								uiOutput("annual_control")
+							),
+							column(4,
+								uiOutput("annual_color_o")
+							)
+						)
+					,width=12)
+				)
+			),
 			tabsetPanel(
 				tabPanel("General Metrics",
 					br(),
-					fluidRow(
-						column(4,
-							sidebarPanel(
-								uiOutput("metric_range")
-							,width=12),
-						)
-					),
 					fluidRow(
 						column(4,
 							sidebarPanel(
@@ -183,13 +190,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								uiOutput("annual_control_income")
-							,width=12)
-						)
-					),
-					fluidRow(
-						column(4,
-							sidebarPanel(
 								uiOutput("netincome"),
 								uiOutput("income_plots"),
 								br(),
@@ -216,13 +216,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				),
 				tabPanel("Balance",
 					br(),
-					fluidRow(
-						column(4,
-							sidebarPanel(
-								uiOutput("annual_control_balance")
-							,width=12)
-						)
-					),
 					fluidRow(
 						column(4,
 							sidebarPanel(
@@ -255,13 +248,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								uiOutput("annual_control_cash")
-							,width=12)
-						)
-					),
-					fluidRow(
-						column(4,
-							sidebarPanel(
 								uiOutput("operating_cashflow"),
 								uiOutput("operating_cashflow_plot"),
 								br(),
@@ -290,16 +276,23 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 		),
 		tabPanel("Quarterly",
 			br(),
+			fluidRow(
+				column(4,
+					sidebarPanel(
+						fluidRow(
+							column(8,
+								uiOutput("quarterly_control")
+							),
+							column(4,
+								uiOutput("quarterly_color_o")
+							)
+						)
+					,width=12)
+				)
+			),
 			tabsetPanel(
 				tabPanel("General Metrics",
 					br(),
-					fluidRow(
-						column(4,
-							sidebarPanel(
-								uiOutput("metric_range_quarterly")
-							,width=12),
-						)
-					),
 					fluidRow(
 						column(4,
 							sidebarPanel(
@@ -350,13 +343,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								uiOutput("quarterly_control_income")
-							,width=12)
-						)
-					),
-					fluidRow(
-						column(4,
-							sidebarPanel(
 								uiOutput("netincome_quarterly"),
 								uiOutput("income_plots_quarterly"),
 								br(),
@@ -386,13 +372,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					fluidRow(
 						column(4,
 							sidebarPanel(
-								uiOutput("quarterly_control_balance")
-							,width=12)
-						)
-					),
-					fluidRow(
-						column(4,
-							sidebarPanel(
 								uiOutput("assets_balance_quarterly"),
 								uiOutput("assets_balance_plot_quarterly"),
 								br(),
@@ -419,13 +398,6 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				),
 				tabPanel("Cash",
 					br(),
-					fluidRow(
-						column(4,
-							sidebarPanel(
-								uiOutput("quarterly_control_cash")
-							,width=12)
-						)
-					),
 					fluidRow(
 						column(4,
 							sidebarPanel(

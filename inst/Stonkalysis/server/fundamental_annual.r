@@ -1,42 +1,50 @@
-annual_range_income <- reactiveValues(annual_range_income = c(1:2))
+annual_range <- reactiveValues(annual_range = c(1:2))
 
-output$annual_control_income <- renderUI ({
+output$annual_color_o <- renderUI ({
+	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+		colourInput("annual_color", "Bar Color", "#2c3e50")
+	} else {
+		HTML("")
+	}
+})
+
+output$annual_control <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		years_length <- ticker_df$ticker_df[[1]][[1]]
 		years <- c()
 		for(i in 1:length(years_length)) {
 			years <- c(years, years_length[[i]]$fiscalYear)
 		}
-		sliderTextInput("annual_control_income", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
+		sliderTextInput("annual_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
 	} else {
 		HTML("")
 	}
 })
 
-observeEvent(input$annual_control_income, {
+observeEvent(input$annual_control, {
 	years_length <- ticker_df$ticker_df[[1]][[1]]
 	years_index <- c()
 	year_true <- FALSE
 	for(i in 1:length(years_length)) {
-		if(years_length[[i]]$fiscalYear == input$annual_control_income[1]) {
+		if(years_length[[i]]$fiscalYear == input$annual_control[1]) {
 			year_true <- TRUE
 		}
 		if(year_true) {
 			years_index <- c(years_index, i)
 		}
-		if(years_length[[i]]$fiscalYear == input$annual_control_income[2]) {
+		if(years_length[[i]]$fiscalYear == input$annual_control[2]) {
 			break
 		}
 	}
 	
 	if(length(years_index) == 1) {
 		if(years_index == 1) {
-			annual_range_income$annual_range_income <- c(1:2)
+			annual_range$annual_range <- c(1:2)
 		} else {
-			annual_range_income$annual_range_income <- c((years_index[1] - 1), years_index[1])
+			annual_range$annual_range <- c((years_index[1] - 1), years_index[1])
 		}
 	} else {
-		annual_range_income$annual_range_income <- years_index
+		annual_range$annual_range <- years_index
 	}
 })
 
@@ -49,12 +57,12 @@ output$income_plots <- renderUI ({
 		income <- ticker_df$ticker_df[[1]][[1]]
 		output$income_plot <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_income$annual_range_income) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(income[[o]]$incomeNet, income[[o]]$fiscalYear))			 
 			}
 			colnames(p_df) <- c("Income", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Income), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("income_plot")
 	} else {
@@ -65,7 +73,7 @@ output$income_plots <- renderUI ({
 output$income_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		income_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_income$annual_range_income
+		range <- annual_range$annual_range
 		output$income_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -99,12 +107,12 @@ output$revenue_plots <- renderUI ({
 		revenue <- ticker_df$ticker_df[[1]][[1]]
 		output$revenue_plot <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_income$annual_range_income) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(revenue[[o]]$revenue, revenue[[o]]$fiscalYear))	
 			}
 			colnames(p_df) <- c("Revenue", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Revenue), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("revenue_plot")
 	} else {
@@ -115,7 +123,7 @@ output$revenue_plots <- renderUI ({
 output$revenue_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		revenue_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_income$annual_range_income
+		range <- annual_range$annual_range
 		output$revenue_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -150,12 +158,12 @@ output$operating_plots <- renderUI ({
 		operating_income <- ticker_df$ticker_df[[1]][[1]]
 		output$operating_plot <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_income$annual_range_income) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(operating_income[[o]]$incomeOperating, operating_income[[o]]$fiscalYear))		
 			}
 			colnames(p_df) <- c("Operating", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_plot")
 	} else {
@@ -166,7 +174,7 @@ output$operating_plots <- renderUI ({
 output$operating_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		operating_income_table <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_income$annual_range_income
+		range <- annual_range$annual_range
 		output$operating_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -191,48 +199,6 @@ output$operating_table <- renderUI ({
 	}
 })
 
-annual_range_cash <- reactiveValues(annual_range_cash = c(1:2))
-
-output$annual_control_cash <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		years_length <- ticker_df$ticker_df[[1]][[1]]
-		years <- c()
-		for(i in 1:length(years_length)) {
-			years <- c(years, years_length[[i]]$fiscalYear)
-		}
-		sliderTextInput("annual_control_cash", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
-	} else {
-		HTML("")
-	}
-})
-
-observeEvent(input$annual_control_cash, {
-	years_length <- ticker_df$ticker_df[[1]][[1]]
-	years_index <- c()
-	year_true <- FALSE
-	for(i in 1:length(years_length)) {
-		if(years_length[[i]]$fiscalYear == input$annual_control_cash[1]) {
-			year_true <- TRUE
-		}
-		if(year_true) {
-			years_index <- c(years_index, i)
-		}
-		if(years_length[[i]]$fiscalYear == input$annual_control_cash[2]) {
-			break
-		}
-	}
-	
-	if(length(years_index) == 1) {
-		if(years_index == 1) {
-			annual_range_cash$annual_range_cash <- c(1:2)
-		} else {
-			annual_range_cash$annual_range_cash <- c((years_index[1] - 1), years_index[1])
-		}
-	} else {
-		annual_range_cash$annual_range_cash <- years_index
-	}
-})
-
 output$operating_cashflow <- renderUI({
 	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Operations</font></h3></strong>")
 })
@@ -242,12 +208,12 @@ output$operating_cashflow_plot <- renderUI ({
 		operating <- ticker_df$ticker_df[[1]][[1]]
 		output$operating_cashflow_p <- renderPlot({
 				p_df <- data.frame()
-				for(o in annual_range_cash$annual_range_cash) {
+				for(o in annual_range$annual_range) {
 					p_df <- rbind(p_df, data.frame(operating[[o]]$cashFlowOperating, operating[[o]]$fiscalYear))			 
 				}
 				colnames(p_df) <- c("Operating", "Year")
 				p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+				ggplot(p_df) + geom_bar(aes(x=Year, y=Operating), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("operating_cashflow_p")
 	} else {
@@ -258,7 +224,7 @@ output$operating_cashflow_plot <- renderUI ({
 output$operating_cashflow_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		operating_cashflow_df <- ticker_df$ticker_df[[1]][[1]]	
-		range <- annual_range_cash$annual_range_cash
+		range <- annual_range$annual_range
 		output$operating_cashflow_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -292,12 +258,12 @@ output$investing_cashflow_plot <- renderUI ({
 		investing <- ticker_df$ticker_df[[1]][[1]]
 		output$investing_cashflow_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_cash$annual_range_cash) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(investing[[o]]$cashFlowInvesting, investing[[o]]$fiscalYear))			 
 			}
 			colnames(p_df) <- c("Investing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Investing), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("investing_cashflow_p")
 	} else {
@@ -308,7 +274,7 @@ output$investing_cashflow_plot <- renderUI ({
 output$investing_cashflow_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		investing_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_cash$annual_range_cash
+		range <- annual_range$annual_range
 		output$investing_cashflow_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -342,12 +308,12 @@ output$financing_cashflow_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$financing_cashflow_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_cash$annual_range_cash) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(financing[[o]]$cashFlowFinancing, financing[[o]]$fiscalYear))			 
 			}
 			colnames(p_df) <- c("Financing", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Financing), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("financing_cashflow_p")
 	} else {
@@ -358,7 +324,7 @@ output$financing_cashflow_plot <- renderUI ({
 output$financing_cashflow_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		financing_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_cash$annual_range_cash
+		range <- annual_range$annual_range
 		output$financing_cashflow_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -383,48 +349,6 @@ output$financing_cashflow_table <- renderUI ({
 	}
 })
 
-annual_range_balance <- reactiveValues(annual_range_balance = c(1:2))
-
-output$annual_control_balance <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		years_length <- ticker_df$ticker_df[[1]][[1]]
-		years <- c()
-		for(i in 1:length(years_length)) {
-			years <- c(years, years_length[[i]]$fiscalYear)
-		}
-		sliderTextInput("annual_control_balance", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
-	} else {
-		HTML("")
-	}
-})
-
-observeEvent(input$annual_control_balance, {
-	years_length <- ticker_df$ticker_df[[1]][[1]]
-	years_index <- c()
-	year_true <- FALSE
-	for(i in 1:length(years_length)) {
-		if(years_length[[i]]$fiscalYear == input$annual_control_balance[1]) {
-			year_true <- TRUE
-		}
-		if(year_true) {
-			years_index <- c(years_index, i)
-		}
-		if(years_length[[i]]$fiscalYear == input$annual_control_balance[2]) {
-			break
-		}
-	}
-	
-	if(length(years_index) == 1) {
-		if(years_index == 1) {
-			annual_range_balance$annual_range_balance <- c(1:2)
-		} else {
-			annual_range_balance$annual_range_balance <- c((years_index[1] - 1), years_index[1])
-		}
-	} else {
-		annual_range_balance$annual_range_balance <- years_index
-	}
-})
-
 output$assets_balance <- renderUI({
 	HTML("<strong><h3><font color=\"#000000\">Total Assets</font></h3></strong>")
 })
@@ -434,12 +358,12 @@ output$assets_balance_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$assets_balance_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_balance$annual_range_balance) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(assets[[o]]$assetsUnadjusted, assets[[o]]$fiscalYear))			 
 			}
 			colnames(p_df) <- c("Assets", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Assets), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("assets_balance_plot_p")
 	} else {
@@ -450,7 +374,7 @@ output$assets_balance_plot <- renderUI ({
 output$assets_balance_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		assets_balance_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_balance$annual_range_balance
+		range <- annual_range$annual_range
 		output$assets_balance_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -484,12 +408,12 @@ output$liabilities_balance_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$liabilities_balance_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_balance$annual_range_balance) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(liabilities[[o]]$liabilities, liabilities[[o]]$fiscalYear))			 
 			}
 			colnames(p_df) <- c("Liabilities", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = "#2c3e50") + labs(x="",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=Liabilities), stat="identity", fill = input$annual_color) + labs(x="",y="") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("liabilities_balance_plot_p")
 	} else {
@@ -500,7 +424,7 @@ output$liabilities_balance_plot <- renderUI ({
 output$liabilities_balance_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		liabilities_balance_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_balance$annual_range_balance
+		range <- annual_range$annual_range
 		output$liabilities_balance_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -534,12 +458,12 @@ output$debt_to_asset_balance_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$debt_to_asset_balance_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in annual_range_balance$annual_range_balance) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(round((debt_to_asset[[o]]$liabilities / debt_to_asset[[o]]$assetsUnadjusted),digits=2) * 100, debt_to_asset[[o]]$fiscalYear))			 
 			} 
 			colnames(p_df) <- c("debttoasset", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=debttoasset), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=debttoasset), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("debt_to_asset_balance_plot_p")
 	} else {
@@ -550,7 +474,7 @@ output$debt_to_asset_balance_plot <- renderUI ({
 output$debt_to_asset_balance_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		debt_to_asset_balance_table_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- annual_range_balance$annual_range_balance
+		range <- annual_range$annual_range
 		output$debt_to_asset_balance_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -578,56 +502,6 @@ output$debt_to_asset_balance_table <- renderUI ({
 	}
 })
 
-
-
-
-
-#########################
-
-
-
-metric_range <- reactiveValues(metric_range = c(1:2))
-
-output$metric_range <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		years_length <- ticker_df$ticker_df[[1]][[1]]
-		years <- c()
-		for(i in 1:length(years_length)) {
-			years <- c(years, years_length[[i]]$fiscalYear)
-		}
-		sliderTextInput("metric_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
-	} else {
-		HTML("")
-	}
-})
-
-observeEvent(input$metric_control, {
-	years_length <- ticker_df$ticker_df[[1]][[1]]
-	years_index <- c()
-	year_true <- FALSE
-	for(i in 1:length(years_length)) {
-		if(years_length[[i]]$fiscalYear == input$metric_control[1]) {
-			year_true <- TRUE
-		}
-		if(year_true) {
-			years_index <- c(years_index, i)
-		}
-		if(years_length[[i]]$fiscalYear == input$metric_control[2]) {
-			break
-		}
-	}
-	
-	if(length(years_index) == 1) {
-		if(years_index == 1) {
-			metric_range$metric_range <- c(1:2)
-		} else {
-			metric_range$metric_range <- c((years_index[1] - 1), years_index[1])
-		}
-	} else {
-		metric_range$metric_range <- years_index
-	}
-})
-
 output$eps_title <- renderUI({
 	HTML("<strong><h3><font color=\"#000000\">Earnings per Share</font></h3></strong>")
 })
@@ -637,12 +511,12 @@ output$eps_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$eps_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in metric_range$metric_range) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(round((eps_df[[o]]$incomeNet - eps_df[[o]]$dividendsPreferred) / eps_df[[o]]$sharesOutstandingPeDateBs,digits=2) , eps_df[[o]]$fiscalYear))			 
 			} 
 			colnames(p_df) <- c("EPS", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=EPS), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=EPS), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("eps_plot_p")
 	} else {
@@ -651,10 +525,9 @@ output$eps_plot <- renderUI ({
 })
 
 output$eps_table <- renderUI ({
-
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		eps_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- metric_range$metric_range
+		range <- annual_range$annual_range
 		output$eps_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -680,11 +553,6 @@ output$eps_table <- renderUI ({
 	}
 })
 
-
-
-##############
-
-
 output$roe_title <- renderUI({
 	HTML("<strong><h3><font color=\"#000000\">Return on Equity</font></h3></strong>")
 })
@@ -694,12 +562,12 @@ output$roe_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$roe_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in metric_range$metric_range) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(round(roe_df[[o]]$incomeNet / roe_df[[o]]$equityShareholder,digits=2) , roe_df[[o]]$fiscalYear))			 
 			} 
 			colnames(p_df) <- c("ROE", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=ROE), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=ROE), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("roe_plot_p")
 	} else {
@@ -710,7 +578,7 @@ output$roe_plot <- renderUI ({
 output$roe_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		roe_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- metric_range$metric_range
+		range <- annual_range$annual_range
 		output$roe_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
@@ -736,11 +604,6 @@ output$roe_table <- renderUI ({
 	}
 })
 
-
-
-########
-
-
 output$roa_title <- renderUI({
 	HTML("<strong><h3><font color=\"#000000\">Return on Assets</font></h3></strong>")
 })
@@ -750,12 +613,12 @@ output$roa_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		output$roa_plot_p <- renderPlot({
 			p_df <- data.frame()
-			for(o in metric_range$metric_range) {
+			for(o in annual_range$annual_range) {
 				p_df <- rbind(p_df, data.frame(round(roa_df[[o]]$incomeNet / roa_df[[o]]$assetsUnadjusted,digits=2) , roa_df[[o]]$fiscalYear))			 
 			} 
 			colnames(p_df) <- c("ROA", "Year")
 			p_df[,2] <- factor(p_df[,2], levels = p_df[,2])
-			ggplot(p_df) + geom_bar(aes(x=Year, y=ROA), stat="identity", fill = "#2c3e50") + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
+			ggplot(p_df) + geom_bar(aes(x=Year, y=ROA), stat="identity", fill = input$annual_color) + labs(x="",y="")  + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 14), axis.text.y = element_text(size = 14), plot.background = element_rect(fill = "#f5f5f5"), panel.background = element_rect(fill = "#f5f5f5"), legend.position = "none")
 		}) 
 		plotOutput("roa_plot_p")
 	} else {
@@ -766,7 +629,7 @@ output$roa_plot <- renderUI ({
 output$roa_table <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) >= 1) {
 		roa_df <- ticker_df$ticker_df[[1]][[1]]
-		range <- metric_range$metric_range
+		range <- annual_range$annual_range
 		output$roa_table_render <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{
 			p_df <- data.frame()
 			oi <- 1
