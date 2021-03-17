@@ -2,7 +2,7 @@ annual_range <- reactiveValues(annual_range = c(1:2))
 
 output$annual_color_o <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		colourInput("annual_color", "Bar Color", "#2c3e50")
+		colourInput("annual_color", "Bar color", "#2c3e50")
 	} else {
 		HTML("")
 	}
@@ -46,10 +46,6 @@ observeEvent(input$annual_control, {
 	} else {
 		annual_range$annual_range <- years_index
 	}
-})
-
-output$netincome <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Net Income</font></h3></strong>")
 })
 
 output$income_plots <- renderUI ({
@@ -98,10 +94,6 @@ output$income_table <- renderUI ({
 	}
 })
 
-output$revenue <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Revenue</font></h3></strong>")
-})
-
 output$revenue_plots <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		revenue <- ticker_df$ticker_df[[1]][[1]]
@@ -146,11 +138,6 @@ output$revenue_table <- renderUI ({
 	} else {
 		HTML("No revenue reported")
 	}
-})
-
-
-output$operating <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Operating Income</font></h3></strong>")
 })
 
 output$operating_plots <- renderUI ({
@@ -199,10 +186,6 @@ output$operating_table <- renderUI ({
 	}
 })
 
-output$operating_cashflow <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Operations</font></h3></strong>")
-})
-
 output$operating_cashflow_plot <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
 		operating <- ticker_df$ticker_df[[1]][[1]]
@@ -247,10 +230,6 @@ output$operating_cashflow_table <- renderUI ({
 	} else {
 		HTML("No cash flow from operations reported")
 	}
-})
-
-output$investing_cashflow <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Investing</font></h3></strong>")
 })
 
 output$investing_cashflow_plot <- renderUI ({
@@ -299,10 +278,6 @@ output$investing_cashflow_table <- renderUI ({
 	}
 })
 
-output$financing_cashflow <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Financing</font></h3></strong>")
-})
-
 output$financing_cashflow_plot <- renderUI ({
 	financing <- ticker_df$ticker_df[[1]][[1]]
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
@@ -347,10 +322,6 @@ output$financing_cashflow_table <- renderUI ({
 	} else {
 		HTML("No cash flow from financing reported")
 	}
-})
-
-output$assets_balance <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Assets</font></h3></strong>")
 })
 
 output$assets_balance_plot <- renderUI ({
@@ -399,10 +370,6 @@ output$assets_balance_table <- renderUI ({
 	}
 })
 
-output$liabilities_balance <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Liabilities</font></h3></strong>")
-})
-
 output$liabilities_balance_plot <- renderUI ({
 	liabilities <- ticker_df$ticker_df[[1]][[1]]
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
@@ -447,10 +414,6 @@ output$liabilities_balance_table <- renderUI ({
 	} else {
 		HTML("Total liabilities not reported")
 	}
-})
-
-output$debt_to_asset_balance <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Debt to Asset Ratio</font></h3></strong>")
 })
 
 output$debt_to_asset_balance_plot <- renderUI ({
@@ -502,10 +465,6 @@ output$debt_to_asset_balance_table <- renderUI ({
 	}
 })
 
-output$eps_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Earnings per Share</font></h3></strong>")
-})
-
 output$eps_plot <- renderUI ({
 	eps_df <- ticker_df$ticker_df[[1]][[1]]
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
@@ -553,10 +512,6 @@ output$eps_table <- renderUI ({
 	}
 })
 
-output$roe_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Return on Equity</font></h3></strong>")
-})
-
 output$roe_plot <- renderUI ({
 	roe_df <- ticker_df$ticker_df[[1]][[1]]
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
@@ -602,10 +557,6 @@ output$roe_table <- renderUI ({
 	} else {
 		HTML("Return on equity could not be calculated")
 	}
-})
-
-output$roa_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Return on Assets</font></h3></strong>")
 })
 
 output$roa_plot <- renderUI ({

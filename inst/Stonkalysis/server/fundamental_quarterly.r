@@ -2,7 +2,7 @@ quarterly_range <- reactiveValues(quarterly_range = c(1:2))
 
 output$quarterly_color_o <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		colourInput("quarterly_color", "Bar Color", "#2c3e50")
+		colourInput("quarterly_color", "Bar color", "#2c3e50")
 	} else {
 		HTML("")
 	}
@@ -46,10 +46,6 @@ observeEvent(input$quarterly_control, {
 	} else {
 		quarterly_range$quarterly_range <- quarters_index
 	}
-})
-
-output$netincome_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Net Income</font></h3></strong>")
 })
 
 output$income_plots_quarterly <- renderUI ({
@@ -98,10 +94,6 @@ output$income_table_quarterly <- renderUI ({
 	}
 })
 
-output$revenue_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Revenue</font></h3></strong>")
-})
-
 output$revenue_plots_quarterly <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
 		revenue <- ticker_df$ticker_df[[1]][[2]]
@@ -146,11 +138,6 @@ output$revenue_table_quarterly <- renderUI ({
 	} else {
 		HTML("No revenue reported")
 	}
-})
-
-
-output$operating_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Operating Income</font></h3></strong>")
 })
 
 output$operating_plots_quarterly <- renderUI ({
@@ -245,10 +232,6 @@ output$operating_cashflow_table_quarterly <- renderUI ({
 	}
 })
 
-output$investing_cashflow_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Investing</font></h3></strong>")
-})
-
 output$investing_cashflow_plot_quarterly <- renderUI ({
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
 		investing <- ticker_df$ticker_df[[1]][[2]]
@@ -293,10 +276,6 @@ output$investing_cashflow_table_quarterly <- renderUI ({
 	} else {
 		HTML("No cash flow from investing reported")
 	}
-})
-
-output$financing_cashflow_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Cash Flow from Financing</font></h3></strong>")
 })
 
 output$financing_cashflow_plot_quarterly <- renderUI ({
@@ -345,10 +324,6 @@ output$financing_cashflow_table_quarterly <- renderUI ({
 	}
 })
 
-output$assets_balance_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Assets</font></h3></strong>")
-})
-
 output$assets_balance_plot_quarterly <- renderUI ({
 	assets <- ticker_df$ticker_df[[1]][[2]]
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
@@ -395,10 +370,6 @@ output$assets_balance_table_quarterly <- renderUI ({
 	}
 })
 
-output$liabilities_balance_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Total Liabilities</font></h3></strong>")
-})
-
 output$liabilities_balance_plot_quarterly <- renderUI ({
 	liabilities <- ticker_df$ticker_df[[1]][[2]]
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
@@ -443,10 +414,6 @@ output$liabilities_balance_table_quarterly <- renderUI ({
 	} else {
 		HTML("Total liabilities not reported")
 	}
-})
-
-output$debt_to_asset_balance_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Debt to Asset Ratio</font></h3></strong>")
 })
 
 output$debt_to_asset_balance_plot_quarterly <- renderUI ({
@@ -498,10 +465,6 @@ output$debt_to_asset_balance_table_quarterly <- renderUI ({
 	}
 })
 
-output$eps_title_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Earnings per Share</font></h3></strong>")
-})
-
 output$eps_plot_quarterly <- renderUI ({
 	eps_df <- ticker_df$ticker_df[[1]][[2]]
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
@@ -549,10 +512,6 @@ output$eps_table_quarterly <- renderUI ({
 	}
 })
 
-output$roe_title_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Return on Equity</font></h3></strong>")
-})
-
 output$roe_plot_quarterly <- renderUI ({
 	roe_df <- ticker_df$ticker_df[[1]][[2]]
 	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
@@ -598,10 +557,6 @@ output$roe_table_quarterly <- renderUI ({
 	} else {
 		HTML("Return on equity could not be calculated")
 	}
-})
-
-output$roa_title_quarterly <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Return on Assets</font></h3></strong>")
 })
 
 output$roa_plot_quarterly <- renderUI ({

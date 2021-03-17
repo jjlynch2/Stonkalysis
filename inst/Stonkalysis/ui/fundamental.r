@@ -5,53 +5,85 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			br(),
 			fluidRow(
 				column(6,
-					sidebarPanel(
-						uiOutput("profile1_title"),
+					box(
+						title = "Overview",
+						solidHeader=TRUE,
 						tableOutput("profile1"),
 						br(),
-						uiOutput("profile2")
-					,width=12),
+						uiOutput("profile2"),
+						width=12,
+						status="primary",
+						collapsible = TRUE
+					),
 					fluidRow(
 						column(6,
-							sidebarPanel(
-								tableOutput("am_1")
-							,width=12)
+							box(
+							    solidHeader=TRUE,
+								tableOutput("am_1"),
+								width=12,
+								height="365",
+								status="primary"
+							)
 						),
 						column(6,
-							sidebarPanel(
-								tableOutput("am_2")
-							,width=12)
+							box(
+							    solidHeader=TRUE,
+								tableOutput("am_2"),
+								width=12,
+								height="365",
+								status="primary"
+							)
 						)
 					),
 					fluidRow(
 						column(6,
-							sidebarPanel(
-								tableOutput("am_3")
-							,width=12)
+							box(
+							    solidHeader=TRUE,
+								tableOutput("am_3"),
+								width=12,
+								height="365",
+								status="primary"
+							)
 						),
 						column(6,
-							sidebarPanel(
-								tableOutput("am_4")
-							,width=12)
+							box(
+							    solidHeader=TRUE,
+								tableOutput("am_4"),
+								width=12,
+								height="365",
+								status="primary"
+							)
 						)
 					)
 				),
 				column(6,
-					sidebarPanel(
-						uiOutput("ownership_title"),
+					box(
+						title = "Institutional Ownership (top 10)",
+						solidHeader=TRUE,
 						uiOutput("instutitional_ui_plot"),
-						tableOutput("ownership")
-					,width=12),
-					sidebarPanel(
-						uiOutput("fund_title"),
+						tableOutput("ownership"),
+						width=12,
+						status="primary",
+						collapsible = TRUE
+					),
+					box(
+						title = "Fund Ownership (top 10)",
+						solidHeader=TRUE,
 						uiOutput("fund_ui_plot"),
-						tableOutput("fund")
-					,width=12),
-					sidebarPanel(
-						uiOutput("insider_title"),
+						tableOutput("fund"),
+						width=12,
+						status="primary",
+						collapsible = TRUE
+					),
+					box(
+						title = "Insider Trading (last 6 months)",
+						solidHeader=TRUE,
 						uiOutput("ownership_ui_plot"),
-						tableOutput("insider")
-					,width=12)
+						tableOutput("insider"),
+						width=12,
+						status="primary",
+						collapsible = TRUE
+					)
 				)
 			)
 		),
@@ -59,7 +91,12 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			br(),
 			fluidRow(
 				column(12,
-					sidebarPanel(
+					box(
+						title = "Daily Price Chart",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
 						fluidRow(
 							column(2,
 								uiOutput("plotly_control_ui")
@@ -76,16 +113,20 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 						),
 						fluidRow(
 							uiOutput("plotly_chart_ui")
-						),
-					,width=12)
+						)
+					)
 				)
 			),
 			fluidRow(
 				column(12,
-					sidebarPanel(
-						br(),
-						DT::dataTableOutput('chart_table'),
-					,width=12)
+					box(
+						title = "Daily Price Data",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
+						DT::dataTableOutput('chart_table')
+					)
 				)
 			)
 		),
@@ -93,7 +134,12 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			br(),
 			fluidRow(
 				column(12,
-					sidebarPanel(
+					box(
+						title = "Daily Volatility Measures",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
 						fluidRow(
 							column(2,
 								uiOutput("plotly_control_ui_v")
@@ -109,15 +155,19 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 							uiOutput("table_title"),
 							uiOutput("plotly_chart_ui_v_p")
 						)
-					,width=12)
+					)
 				)
 			),
 			fluidRow(
 				column(12,
-					sidebarPanel(
-						br(),
+					box(
+						title = "Daily Volatility Data",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
 						DT::dataTableOutput('chart_table_v'),
-					,width=12)
+					)
 				)
 			)
 		),
@@ -125,7 +175,12 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			br(),
 			fluidRow(
 				column(4,
-					sidebarPanel(
+					box(
+						title = "Plot Controls",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
 						fluidRow(
 							column(8,
 								uiOutput("annual_control")
@@ -134,7 +189,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 								uiOutput("annual_color_o")
 							)
 						)
-					,width=12)
+					)
 				)
 			),
 			tabsetPanel(
@@ -142,29 +197,41 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("eps_title"),
+							box(
+								title = "Earnings per Share",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("eps_plot"),
 								br(),
 								uiOutput("eps_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("roe_title"),
+							box(
+								title = "Return on Equity",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("roe_plot"),
 								br(),
 								uiOutput("roe_table")
-							,width=12)
+							)
 						
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("roa_title"),
+							box(
+								title = "Return on Assets",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("roa_plot"),
 								br(),
 								uiOutput("roa_table")
-							,width=12)
+							)
 						)
 					
 					#	column(4,
@@ -189,28 +256,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("netincome"),
+							box(
+								title = "Net Income",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("income_plots"),
 								br(),
 								uiOutput("income_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("operating"),
+							box(
+								title = "Operating Income",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("operating_plots"),
 								br(),
 								uiOutput("operating_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("revenue"),
+							box(
+								title = "Total Revenue",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("revenue_plots"),
 								br(),
 								uiOutput("revenue_table")
-							,width=12)
+							)
 						)
 					)
 				),
@@ -218,28 +297,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("assets_balance"),
+							box(
+								title = "Total Assets",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("assets_balance_plot"),
 								br(),
 								uiOutput("assets_balance_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("liabilities_balance"),
+							box(
+								title = "Total Liabilities",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("liabilities_balance_plot"),
 								br(),
 								uiOutput("liabilities_balance_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("debt_to_asset_balance"),
+							box(
+								title = "Debt to Asset Ratio",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("debt_to_asset_balance_plot"),
 								br(),
 								uiOutput("debt_to_asset_balance_table")
-							,width=12)
+							)
 						),
 					)
 				),
@@ -247,28 +338,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("operating_cashflow"),
+							box(
+								title = "Cash Flow from Operations",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("operating_cashflow_plot"),
 								br(),
 								uiOutput("operating_cashflow_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("investing_cashflow"),
+							box(
+								title = "Cash Flow from Investing",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("investing_cashflow_plot"),
 								br(),
 								uiOutput("investing_cashflow_table")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("financing_cashflow"),
+							box(
+								title = "Cash Flow from Financing",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("financing_cashflow_plot"),
 								br(),
 								uiOutput("financing_cashflow_table")
-							,width=12)
+							)
 						),
 					)
 				)
@@ -278,7 +381,12 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 			br(),
 			fluidRow(
 				column(4,
-					sidebarPanel(
+					box(
+						title = "Plot Controls",
+						solidHeader=TRUE,
+						width=12,
+						status="primary",
+						collapsible = TRUE,
 						fluidRow(
 							column(8,
 								uiOutput("quarterly_control")
@@ -287,7 +395,7 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 								uiOutput("quarterly_color_o")
 							)
 						)
-					,width=12)
+					)
 				)
 			),
 			tabsetPanel(
@@ -295,29 +403,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("eps_title_quarterly"),
+							box(
+								title = "Earnings per Share",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("eps_plot_quarterly"),
 								br(),
 								uiOutput("eps_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("roe_title_quarterly"),
+							box(
+								title = "Return on Equity",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("roe_plot_quarterly"),
 								br(),
 								uiOutput("roe_table_quarterly")
-							,width=12)
-						
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("roa_title_quarterly"),
+							box(
+								title = "Return on Assets",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("roa_plot_quarterly"),
 								br(),
 								uiOutput("roa_table_quarterly")
-							,width=12)
+							)
 						)
 					
 					#	column(4,
@@ -342,28 +461,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("netincome_quarterly"),
+							box(
+								title = "Net Income",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("income_plots_quarterly"),
 								br(),
 								uiOutput("income_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("operating_quarterly"),
+							box(
+								title = "Operating Income",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("operating_plots_quarterly"),
 								br(),
 								uiOutput("operating_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("revenue_quarterly"),
+							box(
+								title = "Total Revenue",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("revenue_plots_quarterly"),
 								br(),
 								uiOutput("revenue_table_quarterly")
-							,width=12)
+							)
 						)
 					)
 				),
@@ -371,28 +502,40 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("assets_balance_quarterly"),
+							box(
+								title = "Total Assets",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("assets_balance_plot_quarterly"),
 								br(),
 								uiOutput("assets_balance_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("liabilities_balance_quarterly"),
+							box(
+								title = "Total Liabilities",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("liabilities_balance_plot_quarterly"),
 								br(),
 								uiOutput("liabilities_balance_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("debt_to_asset_balance_quarterly"),
+							box(
+								title = "Debt to Asset Ratio",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("debt_to_asset_balance_plot_quarterly"),
 								br(),
 								uiOutput("debt_to_asset_balance_table_quarterly")
-							,width=12)
+							)
 						),
 					)
 				),
@@ -400,37 +543,49 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 					br(),
 					fluidRow(
 						column(4,
-							sidebarPanel(
-								uiOutput("operating_cashflow_quarterly"),
+							box(
+								title = "Cash Flow from Operations",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("operating_cashflow_plot_quarterly"),
 								br(),
 								uiOutput("operating_cashflow_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("investing_cashflow_quarterly"),
+							box(
+								title = "Cash Flow from Investing",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("investing_cashflow_plot_quarterly"),
 								br(),
 								uiOutput("investing_cashflow_table_quarterly")
-							,width=12)
+							)
 						),
 						column(4,
-							sidebarPanel(
-								uiOutput("financing_cashflow_quarterly"),
+							box(
+								title = "Cash Flow from Financing",
+								solidHeader=TRUE,
+								width=12,
+								status="primary",
+								collapsible = TRUE,
 								uiOutput("financing_cashflow_plot_quarterly"),
 								br(),
 								uiOutput("financing_cashflow_table_quarterly")
-							,width=12)
+							)
 						),
 					)
 				)
 			)
 		),
-		tabPanel("DCF",
+		tabPanel("Discounted Cash Flow",
 			br()
 		),
-		tabPanel("DDM",
+		tabPanel("Dividend Discount Model",
 			br()
 		),
 		tabPanel("Custom Plot",

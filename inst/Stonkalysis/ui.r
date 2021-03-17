@@ -26,6 +26,33 @@ ui <- dashboardPage(skin = "blue",
 		width = 150
 	),
 	dashboardBody(
+		tags$style(HTML("
+			.box.box-solid.box-primary>.box-header {
+				  color:#ffffff;
+				  background:#2c3e50
+			}
+
+			.box.box-solid.box-primary{
+				border-bottom-color:#2c3e50;
+				border-left-color:#2c3e50;
+				border-right-color:#2c3e50;
+				border-top-color:#2c3e50;
+				background:#f5f5f5;
+			}
+
+			.box.box-primary>.box-header {
+				color:#000000;
+				background:#f5f5f5
+			}
+
+			.box.box-primary{
+				border-bottom-color:#2c3e50;
+				border-left-color:#2c3e50;
+				border-right-color:#2c3e50;
+				border-top-color:#2c3e50;
+				background:#f5f5f5;
+			}
+		")),
 		tags$head(
 			tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
 		),

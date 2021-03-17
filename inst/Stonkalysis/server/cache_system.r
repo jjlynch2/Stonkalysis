@@ -22,7 +22,7 @@ observeEvent(TRUE, {
 })
 
 output$api_key <- renderUI({
-	textInput(inputId = "api_key", "API key", value=apikey)
+	textInput(inputId = "api_key", "", value=apikey)
 })
 
 observeEvent(input$update_available_tickers, {
@@ -47,12 +47,12 @@ output$available_tickers <- renderUI({
 	for(t in av_tickers$av_tickers) {
 		ticker_choice$ticker_choice <- ticker_choice$ticker_choice[ticker_choice$ticker_choice != t]
 	}
-	selectizeInput(inputId = "add_ticker", label = "Available Tickers", choices = c(ticker_choice$ticker_choice), multiple = TRUE)
+	selectizeInput(inputId = "add_ticker", label = "", choices = c(ticker_choice$ticker_choice), multiple = TRUE)
 })
 
 output$delete_tickers <- renderUI({
 	temp <- av_tickers$av_tickers
-	selectizeInput(inputId = "delete_ticker", label = "Cached Tickers", choices = c(temp), multiple = TRUE)
+	selectizeInput(inputId = "delete_ticker", label = "", choices = c(temp), multiple = TRUE)
 })
 							
 observeEvent(input$delete_ticker_button, {
@@ -87,7 +87,7 @@ observeEvent(input$add_tickers, {
 
 output$cached_tickers <- renderUI({
 	temp <- av_tickers$av_tickers
-	selectizeInput(inputId = "update_ticker", label = "Cached Tickers", choices = c(temp), multiple = TRUE)
+	selectizeInput(inputId = "update_ticker", label = "", choices = c(temp), multiple = TRUE)
 })
 
 observeEvent(input$update_tickers, {

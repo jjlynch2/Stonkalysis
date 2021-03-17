@@ -45,10 +45,6 @@ output$am_4 <- renderTable(colnames=FALSE, rownames=TRUE, width="100%", striped 
 	rownames(am_4_data) <- c("TTM Dividend Rate: ", "TTM Dividend Yield: ", "Next Dividend Date: ", "Last Dividend Date: ", "Next Earnings Date: ")
 	return(am_4_data)
 })
-	
-output$profile1_title <- renderUI({
-	HTML(paste("<strong><h3><font color=\"#000000\">Overview</font></h3>"))
-})
 
 output$profile1 <- renderTable(colnames=FALSE, rownames=TRUE, width="100%", striped = TRUE,{
 	company_profile <- ticker_df$ticker_df[[2]]
@@ -145,18 +141,6 @@ output$ownership_ui_plot <- renderUI ({
 	} else {
 		HTML("<br>")
 	}
-})
-
-output$fund_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Fund Ownership (top 10)</font></h3></strong>")
-})
-
-output$insider_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Insider Trading (last 6 months)</font></h3></strong>")
-})
-
-output$ownership_title <- renderUI({
-	HTML("<strong><h3><font color=\"#000000\">Institutional Ownership (top 10)</font></h3></strong>")
 })
 
 output$fund <- renderTable(colnames=TRUE, rownames=FALSE, width="100%", striped = TRUE,{

@@ -2,7 +2,7 @@ ticker_df <- reactiveValues(ticker_df = data.frame())
 
 output$tickers <- renderUI({
 	temp <- av_tickers$av_tickers
-	selectInput(inputId = "ticker", label = "Select Ticker", choices = temp)
+	selectInput(inputId = "ticker", label = "", choices = temp)
 })
 
 observeEvent(input$ticker, {
