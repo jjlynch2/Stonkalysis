@@ -1,5 +1,5 @@
 fundamental_ui <- tabItem(tabName = "Fundamental",
-	tabsetPanel(id="tabSelected",
+	tabsetPanel(id="tabSelected1",
 		tabPanel("Profile",
 			br(),
 			fluidRow(
@@ -176,27 +176,8 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				)
 			)
 		),
-		tabPanel("Annual",
+		tabPanel("Annual", value="Annual",
 			br(),
-			fluidRow(
-				column(4,
-					box(
-						title = "Plot Controls",
-						solidHeader=TRUE,
-						width=12,
-						status="primary",
-						collapsible = TRUE,
-						fluidRow(
-							column(8,
-								uiOutput("annual_control")
-							),
-							column(4,
-								uiOutput("annual_color_o")
-							)
-						)
-					)
-				)
-			),
 			tabsetPanel(
 				tabPanel("General Metrics",
 					br(),
@@ -382,27 +363,8 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 				)
 			)
 		),
-		tabPanel("Quarterly",
+		tabPanel("Quarterly", value="Quarterly",
 			br(),
-			fluidRow(
-				column(4,
-					box(
-						title = "Plot Controls",
-						solidHeader=TRUE,
-						width=12,
-						status="primary",
-						collapsible = TRUE,
-						fluidRow(
-							column(8,
-								uiOutput("quarterly_control")
-							),
-							column(4,
-								uiOutput("quarterly_color_o")
-							)
-						)
-					)
-				)
-			),
 			tabsetPanel(
 				tabPanel("General Metrics",
 					br(),
