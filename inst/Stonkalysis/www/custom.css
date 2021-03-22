@@ -30,7 +30,5 @@ a {
 
 .skin-blue .sidebar-menu > li.active > a,
 .skin-blue .sidebar-menu > li:hover > a {
-  border-left-color: #2c3e50;
+	border-left-color: #2c3e50;
 }
-
-

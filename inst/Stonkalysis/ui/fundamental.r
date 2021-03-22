@@ -1,5 +1,4 @@
 fundamental_ui <- tabItem(tabName = "Fundamental",
-	h2("Fundamental"),
 	tabsetPanel(id="tabSelected",
 		tabPanel("Profile",
 			br(),
@@ -112,7 +111,9 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 							)
 						),
 						fluidRow(
-							uiOutput("plotly_chart_ui")
+							column(12,
+								uiOutput("plotly_chart_ui")
+							)
 						)
 					)
 				)
@@ -149,11 +150,15 @@ fundamental_ui <- tabItem(tabName = "Fundamental",
 							)
 						),
 						fluidRow(
-							uiOutput("plotly_chart_ui_v")
+							column(12,
+								uiOutput("plotly_chart_ui_v")
+							)
 						),
 						fluidRow(
-							uiOutput("table_title"),
-							uiOutput("plotly_chart_ui_v_p")
+							column(12,
+								uiOutput("table_title"),
+								uiOutput("plotly_chart_ui_v_p")
+							)
 						)
 					)
 				)

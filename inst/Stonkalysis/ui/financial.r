@@ -1,5 +1,4 @@
 financial_ui <- tabItem(tabName = "Financial",
-	h2("Financial Data"),
 	tabsetPanel(id="tabSelected",
 		tabPanel("TTM",
 			fluidRow(

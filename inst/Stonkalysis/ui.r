@@ -10,11 +10,12 @@ source(system.file("Stonkalysis/ui", 'notes.r', package = "Stonkalysis"), local=
 ui <- dashboardPage(skin = "blue",
 	dashboardHeader(
 		title = "Stonkalysis",
-		titleWidth=150
+		titleWidth=150,
+		dropdownMenuOutput("tickers")
+
 	),
 	dashboardSidebar(
 		sidebarMenu(
-			uiOutput("tickers"),
 			menuItem("About", tabName = "About", icon = icon("question")),
 			menuItem("Configuration", tabName = "Configuration", icon = icon("cogs")),
 			menuItem("Fundamental", tabName = "Fundamental", icon = icon("calculator")),
@@ -26,6 +27,10 @@ ui <- dashboardPage(skin = "blue",
 		width = 150
 	),
 	dashboardBody(
+		tags$head(
+			tags$style(".navbar-custom-menu, .main-header .navbar-right {float: left !important;}"),
+        	tags$head(tags$style(HTML(".selectize-input {max-height: 20px; max-width: 100px; margin-bottom: -25px}")))
+		),
 		tags$style(HTML("
 			.box.box-solid.box-primary>.box-header {
 				  color:#ffffff;
@@ -52,6 +57,13 @@ ui <- dashboardPage(skin = "blue",
 				border-top-color:#2c3e50;
 				background:#f5f5f5;
 			}
+			.nav-tabs-custom .nav-tabs li.active {
+				border-top-color: #2c3e50;
+			}	
+			.nav-tabs-custom .tab-content {
+				background:#ecf0f5;
+			}	
+
 		")),
 		tags$head(
 			tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")

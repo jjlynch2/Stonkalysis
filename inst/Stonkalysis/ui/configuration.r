@@ -1,5 +1,4 @@
 configuration_ui <- tabItem(tabName = "Configuration",
-	h2("Configuration"),
 	tabPanel("Add Ticker",
 		fluidRow(
 			column(3,
@@ -10,13 +9,13 @@ configuration_ui <- tabItem(tabName = "Configuration",
 					status="primary",
 					collapsible = TRUE,
 					uiOutput("available_tickers"),
-					actionButton("update_available_tickers","Update Tickers", icon = icon("refresh")),
+					actionButton("update_available_tickers","Update Ticker List", icon = icon("refresh")),
 					actionButton("add_tickers","Add Tickers", icon = icon("plus"))
 				)
 			),
 			column(3,
 				box(
-					title = "Cached Tickers",
+					title = "Update Cached Tickers",
 					solidHeader=TRUE,
 					width=12,
 					status="primary",
@@ -27,7 +26,7 @@ configuration_ui <- tabItem(tabName = "Configuration",
 			),
 			column(3,
 				box(
-					title = "Cached Tickers",
+					title = "Delete Cached Tickers",
 					solidHeader=TRUE,
 					width=12,
 					status="primary",
