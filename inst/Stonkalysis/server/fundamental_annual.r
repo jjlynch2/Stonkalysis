@@ -1,23 +1,27 @@
 annual_range <- reactiveValues(annual_range = c(1:2))
 
 output$annual_color_o <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		colourInput("annual_color", "Bar color", "#2c3e50")
-	} else {
-		HTML("")
+	if(length(ticker_df$ticker_df) > 0) {
+		if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+			colourInput("annual_color", "Bar color", "#2c3e50")
+		} else {
+			HTML("")
+		}
 	}
 })
 
 output$annual_control <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		years_length <- ticker_df$ticker_df[[1]][[1]]
-		years <- c()
-		for(i in 1:length(years_length)) {
-			years <- c(years, years_length[[i]]$fiscalYear)
+	if(length(ticker_df$ticker_df) > 0) {
+		if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+			years_length <- ticker_df$ticker_df[[1]][[1]]
+			years <- c()
+			for(i in 1:length(years_length)) {
+				years <- c(years, years_length[[i]]$fiscalYear)
+			}
+			sliderTextInput("annual_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
+		} else {
+			HTML("")
 		}
-		sliderTextInput("annual_control", label="Select years", choices=c(years), selected = c(years[1], years[length(years)]))
-	} else {
-		HTML("")
 	}
 })
 

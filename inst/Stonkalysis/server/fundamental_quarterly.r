@@ -1,23 +1,27 @@
 quarterly_range <- reactiveValues(quarterly_range = c(1:2))
 
 output$quarterly_color_o <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
-		colourInput("quarterly_color", "Bar color", "#2c3e50")
-	} else {
-		HTML("")
+	if(length(ticker_df$ticker_df) > 0) {
+		if(length(ticker_df$ticker_df[[1]][[1]]) > 1) {
+			colourInput("quarterly_color", "Bar color", "#2c3e50")
+		} else {
+			HTML("")
+		}
 	}
 })
 
 output$quarterly_control <- renderUI ({
-	if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
-		quarters_length <- ticker_df$ticker_df[[1]][[2]]
-		quarters <- c()
-		for(i in 1:length(quarters_length)) {
-			quarters <- c(quarters, paste(quarters_length[[i]]$fiscalYear, quarters_length[[i]]$fiscalQuarter, sep=":"))
+	if(length(ticker_df$ticker_df) > 0) {
+		if(length(ticker_df$ticker_df[[1]][[2]]) > 1) {
+			quarters_length <- ticker_df$ticker_df[[1]][[2]]
+			quarters <- c()
+			for(i in 1:length(quarters_length)) {
+				quarters <- c(quarters, paste(quarters_length[[i]]$fiscalYear, quarters_length[[i]]$fiscalQuarter, sep=":"))
+			}
+			sliderTextInput("quarterly_control", label="Select quarters", choices=c(quarters), selected = c(quarters[1], quarters[length(quarters)]))
+		} else {
+			HTML("")
 		}
-		sliderTextInput("quarterly_control", label="Select quarters", choices=c(quarters), selected = c(quarters[1], quarters[length(quarters)]))
-	} else {
-		HTML("")
 	}
 })
 
